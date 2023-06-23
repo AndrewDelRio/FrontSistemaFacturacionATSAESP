@@ -1,0 +1,34 @@
+.Login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.modal-title,
+.modal-text {
+    margin: 0;
+    font-size: var(--text-size);
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-input-code {
+    width: 100px;
+}
+
+.modal-input-password {
+    width: 200px;
+}
+
+.modal-input-code,
+.modal-input-password {
+    border: solid 2px;
+    border-radius: 10px;
+    font-size: var(--text-size);
+    padding-inline: 10px;
+    padding-block: 5px;
+}

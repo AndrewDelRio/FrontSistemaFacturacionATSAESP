@@ -29,7 +29,7 @@
     font-size: var(--text-size);
 }
 
-.Aqueduct-oficial-page {
+.Aqueduct-oficial-page a {
     display: flex;
     flex-direction: column;
 }
