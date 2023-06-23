@@ -90,6 +90,11 @@ const LoginForm = ({forgotPassword}) => {
             <a onClick={forgotPassword}>Olvidé Mi Contraseña</a>
         </div>
     )
+
+    function getEmail(){
+        return loginUser    
+    }
 }
+
 
 export default LoginForm

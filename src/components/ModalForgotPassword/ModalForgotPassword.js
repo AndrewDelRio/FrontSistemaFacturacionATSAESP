@@ -1,23 +1,26 @@
+import React from "react"
 import styled from "styled-components"
+import Overlay from "overlay"
 import { useNavigate } from "react-router-dom"
 import closeIcon from "../../assets/images/close.svg"
 import appIcon from "../../assets/images/Logo.png"
 import "./ModalForgotPassword.css"
 
 export default function ModalForgotPassword({state, closeFunction, title, content,acceptFunction}) {
+    
     return (
         <>
-        {state && 
-        <Overlay>
-            <ModalContainer>
-                <input type="image" src={closeIcon} width={25} onClick={closeFunction} className="button-close"/>
-                <img src={appIcon} width={80}/>
-                {title}
-                {content}
-                <button onClick={acceptFunction} className="accept-modal-button">Aceptar</button>
-            </ModalContainer>
-        </Overlay>
-        }
+            {state && 
+            <Overlay>
+                <ModalContainer>
+                    <input type="image" src={closeIcon} width={25} onClick={closeFunction} className="button-close"/>
+                    <img src={appIcon} width={80}/>
+                    {title}
+                    {content}
+                    <button onClick={acceptFunction} className="accept-modal-button">Aceptar</button>
+                </ModalContainer>
+            </Overlay>
+            }
         </>
     ) 
 }
