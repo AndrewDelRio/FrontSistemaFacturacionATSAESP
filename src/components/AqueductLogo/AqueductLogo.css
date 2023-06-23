@@ -1,0 +1,35 @@
+.Aqueduct-logo {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-blue);
+}
+
+.Aqueduct-name p {
+    color: var(--white);
+    font-size: var(--text-size);
+}
+
+.Aqueduct-logo-circle {
+    padding: 10px;
+    background-color: var(--white);
+    border-radius: 50%;
+}
+
+.Aqueduct-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.Aqueduct-oficial-page a {
+    color: var(--white);
+    font-size: var(--text-size);
+}
+
+.Aqueduct-oficial-page {
+    display: flex;
+    flex-direction: column;
+}

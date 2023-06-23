@@ -1,3 +1,23 @@
+:root {
+  --blue: #0068f9;
+  --light-blue: #3775C9;
+  --white: #F9FBFD;
+  --yellow: #F7C606;
+  --green: #057D06;
+  --black: #000001;
+  --red: #FF5757;
+  --dark-color: #000001;
+
+  --title-size: 30px;
+  --title-small-size: 25px;
+  --text-size: 20px;
+  --text-form-size: 18px;
+  --nav-bar-text-size: 16px;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
