@@ -6,6 +6,7 @@ import userIcon from "../../assets/images/user.svg"
 import passwordIcon from "../../assets/images/password.svg"
 import hideIcon from "../../assets/images/hide.svg"
 import viewIcon from "../../assets/images/view.svg"
+import sha256 from 'js-sha256'
 import "./LoginForm.css"
 
 const LoginForm = ({forgotPassword}) => {
@@ -18,16 +19,15 @@ const LoginForm = ({forgotPassword}) => {
     const [showPasswordState, setPasswordState] = useState(false);
     
     const handleSubmitLogin = (e) => {
-        e.prevendDefault();
+        e.preventDefault();
         setInvalidAuth(false)
         const user = {
             email:loginUser,
-            password: loginPassword
+            password: sha256(loginPassword)
         };
 
         axios.post(environment.APIHost + '/login', user).then(res =>{
             if (res.data.ok) {
-                
                 if (res.data.message.active_state) {
                     setInvalidAuth(false)
                     sessionStorage.setItem('token', res.data.token)
@@ -66,34 +66,28 @@ const LoginForm = ({forgotPassword}) => {
     }
     return (
         <div className="login-form">
-            <p className="login-title"><b>Inicio de Sesión</b></p>
+            <p className="login-title"><b>Inicar sesión</b></p>
             {
-                invalidAuth &&
-                <p className="auth-error-message">Usuario o contraseña incorrecta</p>
-            }
-            {
+                (invalidAuth &&
+                <p className="auth-error-message">¡¡Usuario o contraseña incorrecta!!</p>) || (
                 noActiveAuth &&
-                <p className="no-active-error-message"> Usuario No Activo En El Sistema</p>
+                <p className="no-active-error-message">¡¡Usuario no activo en el sistema!!</p>)
             }
             <div className="input-login">
-                <img src={userIcon} width={30}></img>
+                <img src={userIcon} width={30} alt = ""></img>
                 <input type="text" placeholder="Usuario" className="input-user" value = {loginUser} onChange={(e) => setLoginUser(e.target.value)}/>
             </div>
             <div className="input-login">
-            <img src={passwordIcon} width={30}></img>
+            <img src={passwordIcon} width={30} alt = ""></img>
             <input type={showPasswordState? "text":"password"} placeholder="Contraseña" className="input-password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}/>
             <button className="show-hide-button" onClick={() => setPasswordState(!showPasswordState)}>
-                <img src = {showPasswordState ? hideIcon : viewIcon} width={30}></img>
+                <img src = {showPasswordState ? hideIcon : viewIcon} width={30} alt=""></img>
             </button>
             </div>
             <button className="button-login" onClick={handleSubmitLogin}><b>Ingresar</b></button>
             <a onClick={forgotPassword}>Olvidé Mi Contraseña</a>
         </div>
     )
-
-    function getEmail(){
-        return loginUser    
-    }
 }
 
 

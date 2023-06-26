@@ -20,6 +20,13 @@
     width: 100px;
 }
 
+.modal-input-email {
+    margin-top: 2%;
+    font-size: var(--text-size);
+    width: 95%;
+    text-align: center;
+}
+
 .modal-input-password {
     width: 200px;
 }

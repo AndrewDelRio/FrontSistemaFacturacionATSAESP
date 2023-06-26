@@ -1,28 +1,25 @@
 import React from "react"
 import styled from "styled-components"
-import Overlay from "overlay"
-import { useNavigate } from "react-router-dom"
 import closeIcon from "../../assets/images/close.svg"
 import appIcon from "../../assets/images/Logo.png"
 import "./ModalForgotPassword.css"
 
 export default function ModalForgotPassword({state, closeFunction, title, content,acceptFunction}) {
-    
     return (
-        <>
+        <div>
             {state && 
             <Overlay>
                 <ModalContainer>
-                    <input type="image" src={closeIcon} width={25} onClick={closeFunction} className="button-close"/>
-                    <img src={appIcon} width={80}/>
+                    <input type="image" src={closeIcon} width={25} onClick={closeFunction} className="button-close" alt = ""/>
+                    <img src={appIcon} width={80} alt = ""/>
                     {title}
                     {content}
-                    <button onClick={acceptFunction} className="accept-modal-button">Aceptar</button>
+                    <button onClick={acceptFunction} className="accept-modal-button">Enviar</button>
                 </ModalContainer>
             </Overlay>
             }
-        </>
-    ) 
+        </div>
+    )
 }
 
 const Overlay = styled.div`
@@ -48,4 +45,4 @@ const ModalContainer = styled.div`
     justify-content: center;
     align-items: center;
     row-gap: 20px;
-`;
+`

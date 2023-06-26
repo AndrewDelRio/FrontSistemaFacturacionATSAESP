@@ -31,3 +31,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+button {
+  padding: 2%;
+  border-radius: 10px;
+  border: none;
+  background: var(--light-blue);
+  color: var(--white);
+  font-size: var(--text-size);
+  cursor: pointer;
+  font-size: var(--text-size);
+  font-weight: bold;
+}
