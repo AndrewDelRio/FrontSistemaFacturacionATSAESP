@@ -66,6 +66,13 @@ input:focus {
     font-weight: bold;
 }
 
+.out-of-time-error-message {
+    margin: 0;
+    font-size: var(--text-form-size);
+    color: var(--red);
+    font-weight: bold;
+}
+
 .show-hide-button {
     all: unset;
     margin: 0;

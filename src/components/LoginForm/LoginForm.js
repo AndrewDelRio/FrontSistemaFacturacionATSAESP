@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {environment} from "../../environment/Environment"
+import { environment } from "../../environment/Environment"
 import userIcon from "../../assets/images/user.svg"
 import passwordIcon from "../../assets/images/password.svg"
 import hideIcon from "../../assets/images/hide.svg"
@@ -9,24 +9,26 @@ import viewIcon from "../../assets/images/view.svg"
 import sha256 from 'js-sha256'
 import "./LoginForm.css"
 
-const LoginForm = ({forgotPassword}) => {
+const LoginForm = ({ forgotPassword }) => {
     const navigate = useNavigate()
 
     const [loginUser, setLoginUser] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
     const [invalidAuth, setInvalidAuth] = useState("")
-    const[noActiveAuth, setNoActiveAuth] = useState("")
+    const [noActiveAuth, setNoActiveAuth] = useState("")
+    const [outOfTimeAuth, setOutOfTime] = useState("")
     const [showPasswordState, setPasswordState] = useState(false);
-    
+
     const handleSubmitLogin = (e) => {
         e.preventDefault();
         setInvalidAuth(false)
         const user = {
-            email:loginUser,
-            password: sha256(loginPassword)
+            email: loginUser,
+            password: sha256(loginPassword),
+            date: new Date()
         };
 
-        axios.post(environment.APIHost + '/login', user).then(res =>{
+        axios.post(environment.APIHost + '/login', user).then(res => {
             if (res.data.ok) {
                 if (res.data.message.active_state) {
                     setInvalidAuth(false)
@@ -39,16 +41,16 @@ const LoginForm = ({forgotPassword}) => {
                     switch (id_role) {
                         case 1:
                             navigate('/manager')
-                        break;
+                            break;
                         case 2:
                             navigate('/secretary')
-                        break;
+                            break;
                         case 3:
                             navigate('/flume')
-                        break;
+                            break;
                         case 4:
                             navigate('/admin')
-                        break;
+                            break;
                         default:
                             setNoActiveAuth(true)
                             break;
@@ -57,7 +59,12 @@ const LoginForm = ({forgotPassword}) => {
                     setNoActiveAuth(true)
                 }
             } else {
-                setInvalidAuth(true)
+                if (res.data.error === "Out of time") {
+                    setOutOfTime(true);
+                } else {
+                    setInvalidAuth(true)
+                }
+
             }
         }
         ).catch(err => {
@@ -69,20 +76,23 @@ const LoginForm = ({forgotPassword}) => {
             <p className="login-title"><b>Inicar sesión</b></p>
             {
                 (invalidAuth &&
-                <p className="auth-error-message">¡¡Usuario o contraseña incorrecta!!</p>) || (
-                noActiveAuth &&
-                <p className="no-active-error-message">¡¡Usuario no activo en el sistema!!</p>)
+                    <p className="auth-error-message">¡¡Usuario o contraseña incorrecta!!</p>) ||
+                (
+                    noActiveAuth &&
+                    <p className="no-active-error-message">¡¡Usuario no activo en el sistema!!</p>) ||
+                (outOfTimeAuth &&
+                    <p className="out-of-time-error-message">¡¡No tienes permiso para acceder fuera del horario permitido!!</p>)
             }
             <div className="input-login">
-                <img src={userIcon} width={30} alt = ""></img>
-                <input type="text" placeholder="Usuario" className="input-user" value = {loginUser} onChange={(e) => setLoginUser(e.target.value)}/>
+                <img src={userIcon} width={30} alt=""></img>
+                <input type="text" placeholder="Usuario" className="input-user" value={loginUser} onChange={(e) => setLoginUser(e.target.value)} />
             </div>
             <div className="input-login">
-            <img src={passwordIcon} width={30} alt = ""></img>
-            <input type={showPasswordState? "text":"password"} placeholder="Contraseña" className="input-password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}/>
-            <button className="show-hide-button" onClick={() => setPasswordState(!showPasswordState)}>
-                <img src = {showPasswordState ? hideIcon : viewIcon} width={30} alt=""></img>
-            </button>
+                <img src={passwordIcon} width={30} alt=""></img>
+                <input type={showPasswordState ? "text" : "password"} placeholder="Contraseña" className="input-password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                <button className="show-hide-button" onClick={() => setPasswordState(!showPasswordState)}>
+                    <img src={showPasswordState ? hideIcon : viewIcon} width={30} alt=""></img>
+                </button>
             </div>
             <button className="button-login" onClick={handleSubmitLogin}><b>Ingresar</b></button>
             <a onClick={forgotPassword}>Olvidé Mi Contraseña</a>
