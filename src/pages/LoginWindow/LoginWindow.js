@@ -1,18 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import AqueductLogo from '../../components/AqueductLogo/AqueductLogo';
 import LoginForm from '../../components/LoginForm/LoginForm'
 import ModalForgotPassword from '../../components/ModalForgotPassword/ModalForgotPassword'
 import "./LoginWindow.css"
 
-const Loginwindow =() => {
-    const[modalStateVerifyIdentity, changeModalStateVerifyIdentity] = useState(false);
-    const[modalStateCode, changeModalStateCode] = useState(false);
-    const[modalStateChangePassword, changeModalStateChangePassword] = useState(false);
+const Loginwindow = () => {
+    const [modalStateVerifyIdentity, changeModalStateVerifyIdentity] = useState(false);
+    const [modalStateCode, changeModalStateCode] = useState(false);
+    const [modalStateChangePassword, changeModalStateChangePassword] = useState(false);
 
-    return(
+    return (
         <div className='Login'>
-            <AqueductLogo/>
-            <LoginForm forgotPassword={() => changeModalStateVerifyIdentity(true)}/>
+            <AqueductLogo />
+            <LoginForm forgotPassword={() => changeModalStateVerifyIdentity(true)} />
             <ModalForgotPassword
                 state={modalStateVerifyIdentity}
                 closeFunction={() => changeModalStateVerifyIdentity(false)}
@@ -20,7 +20,7 @@ const Loginwindow =() => {
                 content={
                     <div>
                         <p className="modal-text">Ingresa el correo registrado en el sistema</p>
-                        <input type="text" placeholder="Correo electronico" className="modal-input-email"/>
+                        <input type="text" placeholder="Correo electronico" className="modal-input-email" />
                     </div>
                 }
                 acceptFunction={() => {
@@ -31,8 +31,8 @@ const Loginwindow =() => {
             <ModalForgotPassword
                 state={modalStateCode}
                 closeFunction={() => changeModalStateCode(false)}
-                title={<p className="modal-title">Ingresa el código de seguridad<br/>que te hemos enviado</p>}
-                content={<input type="number" className="modal-input-code"/>}
+                title={<p className="modal-title">Ingresa el código de seguridad<br />que te hemos enviado</p>}
+                content={<input type="number" className="modal-input-code" />}
                 acceptFunction={() => {
                     changeModalStateCode(false);
                     changeModalStateChangePassword(true);
@@ -46,11 +46,11 @@ const Loginwindow =() => {
                     <div>
                         <div>
                             <p className="modal-text">Nueva contraseña</p>
-                            <input type="password" className="modal-input-password"/>
+                            <input type="password" className="modal-input-password" />
                         </div>
                         <div>
                             <p className="modal-text">Confirmar contraseña</p>
-                            <input type="password" className="modal-input-password"/>
+                            <input type="password" className="modal-input-password" />
                         </div>
                     </div>
                 }
