@@ -11,7 +11,7 @@ export function ModalActionPerformed({ img, title, state, accept, cancel }) {
                         <img alt="" src={img} height={100} />
                         <p className="p-modal">{title}</p>
                         <button onClick={accept} className="accept-modal-button">Sí</button>
-                        <button onClick={cancel} className="cancel-modal.button">No</button>
+                        <button onClick={cancel} className="cancel-modal-button">No</button>
                     </ModalContainer>
                 </Overlay>}
         </>
