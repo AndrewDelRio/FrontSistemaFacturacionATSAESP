@@ -1,11 +1,13 @@
+import React from "react"
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
-import { ReactComponent as ExitIcon } from "../../assets/images/ExitIcon.svg"
-import { ReactComponent as SettingsIcon } from "../../assets/images/SettingsIcon.svg"
+import { ReactComponent as ExitIcon } from "../../assets/images/exit.svg"
+import { ReactComponent as SettingsIcon } from "../../assets/images/settings.svg"
 import "./ModalSession.css"
 const defaultIconsColor = "#000000"
 
 export function ModalSession({ state, closeFunction }) {
+
     const navigate = useNavigate()
 
     const handleClickExit = () => {
@@ -22,10 +24,10 @@ export function ModalSession({ state, closeFunction }) {
     }
 
     return (
-        <>
+        <div>
             {state &&
                 <Overlay onClick={closeFunction}>
-                    <div>
+                    <div className="modal-session">
                         <button onClick={handleClickExit}>
                             <ExitIcon width={30} height={30} fill={defaultIconsColor} />
                             <p>Cerrar sesión</p>
@@ -37,7 +39,7 @@ export function ModalSession({ state, closeFunction }) {
                     </div>
                 </Overlay>
             }
-        </>
+        </div>
     )
 }
 
@@ -51,4 +53,4 @@ const Overlay = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-`;
+`
