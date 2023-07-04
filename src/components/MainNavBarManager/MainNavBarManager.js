@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import './MainNavBarManager.css';
 import logoApp from "../../assets/images/Logo.png"
-import CollaboratorIcon from "../../assets/images/subscribers.svg"
-import RateIcon from "../../assets/images/property.svg"
-import RebillingIcon from "../../assets/images/enrollment.svg"
-import ReportIcon from "../../assets/images/invoice.svg"
+import CollaboratorIcon from "../../assets/images/colaborador.png"
+import RateIcon from "../../assets/images/dinero.png"
+import RebillingIcon from "../../assets/images/refacturacion.png"
+import ReportIcon from "../../assets/images/reportes.png"
 import userProfileIcon from "../../assets/images/userProfile.svg"
 import { ModalSession } from "../ModalSession/ModalSession";
 const defaultNavIconsColor = "#FFFFFF"
@@ -28,32 +28,36 @@ const MainNavBarManager = () => {
                     <ul>
                         <li>
                             <NavLink to="/manager/collaborators" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
-                                <img alt="" src={CollaboratorIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
+                                <img alt="" src={CollaboratorIcon} width={40} height={40} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Colaboradores</b></p>
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to="/manager/rates" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
-                                <img alt="" src={RateIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
+                                <img alt="" src={RateIcon} width={40} height={40} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Tarifas</b></p>
                             </NavLink>
                         </li>
 
                         <li>
                             <NavLink to="/manager/rebillings" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
-                                <img alt="" src={RebillingIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
+                                <img alt="" src={RebillingIcon} width={40} height={40} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Refacturación</b></p>
                             </NavLink>
                         </li>
 
                         <li>
                             <NavLink to="/manager/reports" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
-                                <img alt="" src={ReportIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
+                                <img alt="" src={ReportIcon} width={40} height={40} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Reportes</b></p>
                             </NavLink>
                         </li>
                     </ul>
                 </nav>
+            </div>
+            <div className="access-container">
+                <p>Ultimo acceso: {sessionStorage.getItem('last_access_date')}</p>
+                <p>Direccion IP: {sessionStorage.getItem('last_access_ip_address')}</p>
             </div>
             <div className="user-container">
                 <ModalSession
@@ -62,9 +66,10 @@ const MainNavBarManager = () => {
                 />
                 <div onClick={() => changeModalState(!modalState)} className="user-profile">
                     <p><b>{sessionStorage.getItem('names_user')}</b></p>
-                    <img alt="" src={userProfileIcon} width={40}></img>
+                    <img alt="" src={userProfileIcon} width={40} ></img>
                 </div>
             </div>
+
         </div>
     )
 }

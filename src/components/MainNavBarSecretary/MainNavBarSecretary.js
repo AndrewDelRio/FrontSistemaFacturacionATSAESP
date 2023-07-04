@@ -55,6 +55,10 @@ const MainNavBar = () => {
                     </ul>
                 </nav>
             </div>
+            <div className="access-container">
+                <p>Ultimo acceso: {sessionStorage.getItem('last_access_date')}</p>
+                <p>Direccion IP: {sessionStorage.getItem('last_access_ip_address')}</p>
+            </div>
             <div className="user-container">
                 <ModalSession
                     state={modalState}
