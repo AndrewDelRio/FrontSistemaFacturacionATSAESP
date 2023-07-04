@@ -27,27 +27,27 @@ const MainNavBar = () => {
                 <nav>
                     <ul>
                         <li>
-                            <NavLink to="/admin/subscribers" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
+                            <NavLink to="/secretary/subscribers" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
                                 <img alt="" src={SubscriberIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Suscriptores</b></p>
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/admin/properties" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
+                            <NavLink to="/secretary/properties" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
                                 <img alt="" src={PropertyIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Predios</b></p>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink to="/admin/enrollments" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
+                            <NavLink to="/secretary/enrollments" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
                                 <img alt="" src={EnrollmentIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Matrículas</b></p>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink to="/admin/Billings" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
+                            <NavLink to="/secretary/Billings" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
                                 <img alt="" src={InvoiceIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Facturación</b></p>
                             </NavLink>

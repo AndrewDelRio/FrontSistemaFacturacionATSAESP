@@ -1,0 +1,85 @@
+.nav-bar {
+    width: 15vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--light-blue);
+}
+
+.logo-container {
+    padding: 20px;
+}
+
+.nav-bar-image {
+    padding: 5px;
+    background-color: var(--white);
+    border-radius: 50%;
+}
+
+.nav-container {
+    align-self: flex-end;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    font-size: var(--nav-bar-text-size);
+}
+
+.nav-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    column-gap: 10px;
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 50px 0 0 50px;
+    padding-inline: 15px 15px;
+}
+
+.nav-option-active {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    column-gap: 10px;
+    text-decoration: none;
+    color: black;
+    background-color: var(--white);
+    border-radius: 50px 0 0 50px;
+    padding-inline: 15px 15px;
+}
+
+.nav-option-active .icon-active {
+    fill: var(--black);
+}
+
+.nav-option:hover {
+    background-color: var(--white);
+    color: black;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    text-decoration: none;
+    color: var(--white);
+    padding-bottom: 20px;
+    cursor: pointer;
+}
