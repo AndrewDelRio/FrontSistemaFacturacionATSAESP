@@ -1,0 +1,28 @@
+.modal-sesion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--white);
+    border-radius: 10px;
+    margin-bottom: 70px;
+    margin-left: 12px;
+}
+
+.modal-sesion>button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+    background-color: var(--white);
+    color: var(--black);
+    padding: 5px;
+}
+
+.modal-sesion>button:hover {
+    background-color: var(--dark-color);
+}
+
+.modal-sesion>button>p {
+    margin: 0;
+}
