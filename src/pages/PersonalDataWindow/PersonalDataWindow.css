@@ -7,13 +7,6 @@
     margin-bottom: auto;
 }
 
-.button-back {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 10px;
-}
-
 .user-profile-icon {
     margin-top: 20px;
 }
@@ -55,4 +48,19 @@
 .personal-data-edit p {
     margin: 0;
     font-size: var(--text-form-size);
+}
+
+.buttons-control {
+    display: block;
+}
+
+.accept-button {
+    padding-inline: 30px;
+    padding-block: 10px;
+}
+
+.back-button {
+    background-color: var(--red);
+    padding-inline: 30px;
+    padding-block: 10px;
 }

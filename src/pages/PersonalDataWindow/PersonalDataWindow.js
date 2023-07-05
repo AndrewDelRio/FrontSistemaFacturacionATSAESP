@@ -80,12 +80,12 @@ export default function PersonalDataWindow() {
                     />
                 </div>
                 <div className="buttons-control">
-                    <button className="accept-button">Guardar cambios</button>
+                    <button className="accept-button" >Guardar</button>
                     <button className="back-button" onClick={() => changeModalbackToPage(!modalStateBack)}>Volver</button>
                     <ModalActionPerformed
                         img={infoIcon}
                         title={"¿Deseas salir?"}
-                        message={"Se perderá toda la información sin guardar"}
+                        message={"¡¡Se perderá toda la información sin guardar!!"}
                         state={modalStateBack}
                         accept={backConfirmation}
                         cancel={handleClickBackButton}
