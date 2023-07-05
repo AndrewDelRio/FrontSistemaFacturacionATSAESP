@@ -9,7 +9,7 @@ export default function SettingsNavBar() {
     return (
         <div className="settings-nav-bar">
             <div className="logo-container">
-                <NavLink to="/admin-personal-data">
+                <NavLink to="/setting-personal-data">
                     <div className="nav-bar-image">
                         <img alt="" src={logoApp} width={100}></img>
                     </div>
