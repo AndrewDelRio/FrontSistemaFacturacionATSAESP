@@ -1,0 +1,19 @@
+.p-modal {
+    margin: 0;
+    font-size: var(--text-size);
+    font-weight: bold;
+}
+
+.input-edit-personal-data {
+    width: 300px;
+    font-size: var(--text-size);
+    border: solid 2px;
+    border-radius: 10px;
+    padding-block: 5px;
+    padding-inline: 10px;
+}
+
+.accept-modal-button {
+    padding-block: 10px;
+    padding-inline: 20px;
+}

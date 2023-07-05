@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/images/back.svg"
 import userProfileIcon from "../../assets/images/userProfile.svg"
@@ -12,7 +13,7 @@ export default function ChangePasswordWindow() {
 
     return (
         <div className="change-password-window">
-            <input type="image" src={backIcon} width={40} onClick={handleClickAdmin} className="button-back" />
+            <input type="image" alt="" src={backIcon} width={40} onClick={handleClickAdmin} className="button-back" />
             <img alt="" src={userProfileIcon} width={100} className="user-profile-icon" />
             <p>Cambiar contraseña</p>
             <div className="change-password-container">

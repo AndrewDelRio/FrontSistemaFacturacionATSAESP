@@ -1,7 +1,8 @@
+import React from "react";
 import { NavLink } from "react-router-dom"
 import logoApp from "../../assets/images/Logo.png"
-import "./SettingsNavBar.css"
-import PersonalDataIcon from "../../assets/images/datosPersonales.png"
+import "./SettingNavBar.css"
+import PersonalDataIcon from "../../assets/images/datospersonales.png"
 import PasswordIcon from "../../assets/images/candado.png"
 const defaultNavIconsColor = "#FFFFFF"
 

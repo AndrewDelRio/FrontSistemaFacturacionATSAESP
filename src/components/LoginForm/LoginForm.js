@@ -37,6 +37,8 @@ const LoginForm = ({ forgotPassword }) => {
                     sessionStorage.setItem('names_user', res.data.message.names_user)
                     sessionStorage.setItem('last_access_date', res.data.message.last_access_date)
                     sessionStorage.setItem('last_access_ip_address', res.data.message.last_access_ip_address)
+                    sessionStorage.setItem('personal_email_user', res.data.message.personal_email_user)
+                    sessionStorage.setItem('phone_number_user', res.data.message.phone_number_user)
                     const id_role = res.data.message.id_role;
                     switch (id_role) {
                         case 1:
