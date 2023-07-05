@@ -11,7 +11,7 @@ export default function SettingsWindows() {
         <div className="settings-window">
             <SettingsNavBar />
             <Routes>
-                <Route path="personal-date" element={<PersonalDataWindow />} />
+                <Route path="personal-dates" element={<PersonalDataWindow />} />
                 <Route path="password" element={<ChangePasswordWindow />} />
                 <Route path="*" element={<NotFoundWindow />} />
             </Routes>

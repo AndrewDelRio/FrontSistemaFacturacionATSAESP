@@ -3,7 +3,7 @@ import './NotFoundWindow.css';
 
 const NotFoundWindow = () => {
     return (
-        <div classname="window-div">
+        <div className="window-div">
             <h1>La página no existe</h1>
         </div>
     )
