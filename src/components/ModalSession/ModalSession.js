@@ -22,7 +22,7 @@ export function ModalSession({ state, closeFunction }) {
     }
 
     const handleClickSettings = () => {
-        navigate('/settings/personal-dates')
+        navigate('/setting/personal-dates')
     }
 
     return (
@@ -30,13 +30,13 @@ export function ModalSession({ state, closeFunction }) {
             {state &&
                 <Overlay onClick={closeFunction}>
                     <div className="modal-session">
-                        <button onClick={handleClickExit}>
-                            <img src={ExitIcon} alt="" width={30} height={30} fill={defaultIconsColor} />
-                            <p>Cerrar sesión</p>
-                        </button>
                         <button onClick={handleClickSettings}>
                             <img src={SettingsIcon} alt="" width={30} height={30} fill={defaultIconsColor} />
                             <p>Gestionar cuenta</p>
+                        </button>
+                        <button onClick={handleClickExit}>
+                            <img src={ExitIcon} alt="" width={30} height={30} fill={defaultIconsColor} />
+                            <p>Cerrar sesión</p>
                         </button>
                     </div>
                 </Overlay>
@@ -48,7 +48,7 @@ export function ModalSession({ state, closeFunction }) {
 const Overlay = styled.div`
     width: 100%;
     height: 100vh;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     // background: rgba(0,0,0,0.5);

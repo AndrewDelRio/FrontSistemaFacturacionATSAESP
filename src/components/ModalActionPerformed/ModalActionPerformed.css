@@ -4,12 +4,24 @@
     font-weight: bold;
 }
 
+.p-modal-message {
+    margin: 0;
+    font-size: var(--text-size);
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .accept-modal-button {
-    padding-inline: 20px;
+    padding-inline: 30px;
     padding-block: 10px;
 }
 
 .cancel-modal-button {
-    padding-inline: 20px;
+    background-color: var(--red);
+    padding-inline: 30px;
     padding-block: 10px;
 }

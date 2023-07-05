@@ -2,19 +2,22 @@ import React from "react"
 import styled from "styled-components"
 import "./ModalActionPerformed.css"
 
-export function ModalActionPerformed({ img, title, state, accept, cancel }) {
+export function ModalActionPerformed({ img, title, message, state, accept, cancel }) {
     return (
-        <>
+        <div>
             {state &&
                 <Overlay>
                     <ModalContainer>
                         <img alt="" src={img} height={100} />
                         <p className="p-modal">{title}</p>
-                        <button onClick={accept} className="accept-modal-button">Sí</button>
-                        <button onClick={cancel} className="cancel-modal-button">No</button>
+                        <p className="p-modal-message">{message}</p>
+                        <div className="button-group">
+                            <button onClick={accept} className="accept-modal-button">Sí</button>
+                            <button onClick={cancel} className="cancel-modal-button">No</button>
+                        </div>
                     </ModalContainer>
                 </Overlay>}
-        </>
+        </div>
     )
 }
 

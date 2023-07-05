@@ -11,7 +11,7 @@ export const Navigation = () => {
             <Route path="/" element={<LoginWindow />} />
             <Route path="/secretary/*" element={<MainwindowSecretary />} />
             <Route path="/manager/*" element={<MainWindowManager />} />
-            <Route path='/settings/*' element={<SettingsWindows />} />
+            <Route path="/setting/*" element={<SettingsWindows />} />
         </Routes>
     )
 }

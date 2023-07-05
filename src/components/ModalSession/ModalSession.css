@@ -1,14 +1,13 @@
-.modal-sesion {
+.modal-session {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: var(--white);
-    border-radius: 10px;
-    margin-bottom: 70px;
-    margin-left: 12px;
+    margin-bottom: 80px;
+    margin-left: 5px;
 }
 
-.modal-sesion>button {
+.modal-session>button {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -19,10 +18,10 @@
     padding: 5px;
 }
 
-.modal-sesion>button:hover {
-    background-color: var(--dark-color);
+.modal-session>button:hover {
+    background-color: var(--white);
 }
 
-.modal-sesion>button>p {
+.modal-session>button>p {
     margin: 0;
 }
