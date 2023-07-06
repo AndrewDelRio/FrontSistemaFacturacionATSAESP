@@ -3,6 +3,7 @@ import styled from "styled-components"
 import "./ModalEditPersonalData.css"
 
 export function ModalEditPersonalData({ state, title, inputType, acceptFunction }) {
+
     return (
         <div>
             {state &&

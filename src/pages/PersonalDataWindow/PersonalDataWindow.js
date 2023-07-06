@@ -6,6 +6,7 @@ import editIcon from "../../assets/images/edit.svg";
 import { ModalEditPersonalData } from "../../components/ModalEditPersonalData/ModalEditPersonalData";
 import { ModalActionPerformed } from "../../components/ModalActionPerformed/ModalActionPerformed";
 import infoIcon from "../../assets/images/warning.svg"
+import ControlButton from "../../components/ControlButton/ControlButton"
 import "./PersonalDataWindow.css";
 
 export default function PersonalDataWindow() {
@@ -45,6 +46,10 @@ export default function PersonalDataWindow() {
         changeModalbackToPage(!modalStateBack);
     }
 
+    const acceptSaveInformation = () => {
+
+    }
+
     const [modalStatePersonalEmail, changeModalStatePersonalEmail] = useState(false);
     const [modalStatePhoneNumber, changeModalStatePhone] = useState(false);
     const [modalStateBack, changeModalbackToPage] = useState(false);
@@ -80,18 +85,21 @@ export default function PersonalDataWindow() {
                     />
                 </div>
                 <div className="buttons-control">
-                    <button className="accept-button" >Guardar</button>
-                    <button className="back-button" onClick={() => changeModalbackToPage(!modalStateBack)}>Volver</button>
-                    <ModalActionPerformed
-                        img={infoIcon}
-                        title={"¿Deseas salir?"}
-                        message={"¡¡Se perderá toda la información sin guardar!!"}
-                        state={modalStateBack}
-                        accept={backConfirmation}
-                        cancel={handleClickBackButton}
+                    <ControlButton
+                        titleAceptButton={"Guardar"}
+                        titleBackButton={"Volver"}
+                        acceptFunction={() => { acceptSaveInformation() }}
+                        backFunction={() => { changeModalbackToPage(!modalStateBack) }}
                     />
                 </div>
-
+                <ModalActionPerformed
+                    img={infoIcon}
+                    title={"¿Deseas salir?"}
+                    message={"¡¡Se perderá toda la información sin guardar!!"}
+                    state={modalStateBack}
+                    accept={backConfirmation}
+                    cancel={handleClickBackButton}
+                />
             </div>
         </div>
     )

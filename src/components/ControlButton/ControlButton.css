@@ -1,0 +1,15 @@
+.control-button {
+    display: block;
+}
+
+.accept-button {
+    padding-block: 10px;
+    padding-inline: 30px;
+}
+
+.back-button {
+    background-color: var(--red);
+    padding-block: 10px;
+    padding-inline: 30px;
+    margin-left: 50px;
+}

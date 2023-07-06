@@ -49,18 +49,3 @@
     margin: 0;
     font-size: var(--text-form-size);
 }
-
-.buttons-control {
-    display: block;
-}
-
-.accept-button {
-    padding-inline: 30px;
-    padding-block: 10px;
-}
-
-.back-button {
-    background-color: var(--red);
-    padding-inline: 30px;
-    padding-block: 10px;
-}

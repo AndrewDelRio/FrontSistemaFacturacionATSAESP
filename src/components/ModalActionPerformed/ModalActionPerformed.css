@@ -21,6 +21,6 @@
 .cancel-modal-button {
     background-color: var(--red);
     padding-inline: 30px;
-    margin-left: 10px;
     padding-block: 10px;
+    margin-left: 10px;
 }
