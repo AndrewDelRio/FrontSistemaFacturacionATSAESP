@@ -10,6 +10,11 @@ import "./ChangePasswordWindow.css"
 export default function ChangePasswordWindow() {
     const navigate = useNavigate()
 
+    const [wrongPassword, setWrongPassword] = useState("")
+    const [firstPassword, setFirstPassword] = useState("")
+    const [secondPassword, setSecondPassword] = useState("")
+    const [emptyPassword, setEmptyPassword] = useState("")
+
     const backConfirmation = () => {
         const role = sessionStorage.getItem('id_role');
         switch (role) {
@@ -36,27 +41,32 @@ export default function ChangePasswordWindow() {
     }
 
     const acceptSaveInformation = () => {
-
+        if (!(firstPassword === secondPassword)) {
+            setWrongPassword(true);
+        }
     }
 
     const [modalStateBack, changeModalbackToPage] = useState(false);
 
     return (
-        <div className="change-password-window">
+        <div className="change-password-window" name="form">
             <img alt="" src={userProfileIcon} width={100} className="user-profile-icon" />
             <p>Cambiar contraseña</p>
             <div className="change-password-container">
+                {wrongPassword &&
+                    <p className="wrong-password">¡¡Las contraseñas no coinciden!!</p>
+                }
                 <div>
                     <p>Contraseña actual</p>
                     <input type="password" />
                 </div>
                 <div>
                     <p>Nueva contraseña</p>
-                    <input type="password" />
+                    <input type="password" name="firstPassword" id="firstPassword" placeholder="Password" value={firstPassword} onChange={(e) => setFirstPassword(e.target.value)} />
                 </div>
                 <div>
                     <p>Confirmar contraseña</p>
-                    <input type="password" />
+                    <input type="password" name="secondPassword" id="secondPassword" placeholder="Password" value={secondPassword} onChange={(e) => setSecondPassword(e.target.value)} />
                 </div>
             </div>
             <div className="control-button">
