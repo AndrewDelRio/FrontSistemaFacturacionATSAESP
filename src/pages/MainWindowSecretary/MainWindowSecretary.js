@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import MainNavBarSecretary from "../../components/MainNavBarSecretary/MainNavBarSecretary";
 import Welcome from "../../components/Welcome/Welcome";
-import { SubscribersWindows } from "../SubscribersWindow/SubscribersWindow"
+import SubscribersWindow from "../SubscribersWindow/SubscribersWindow"
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -11,7 +11,7 @@ const MainWindowSecretary = () => {
             <MainNavBarSecretary />
             <Routes>
                 <Route path="" element={<Welcome />} />
-                <Route path="subscribers" element={<SubscribersWindows />} />
+                <Route path="subscribers" element={<SubscribersWindow />} />
             </Routes>
         </div>
     )

@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./SubscriberWindow.css"
+import "./SubscribersWindow.css"
 import subscriberIcon from "../../assets/images/subscribers.svg"
 import searchIcon from "../../assets/images/search.svg"
 import warningIcon from "../../assets/images/warning.svg"
-import addSubscriberIcon from "../../assets/images/addSubscriuber.svg"
+import addSubscriberIcon from "../../assets/images/addSubscriber.svg"
 import { getSubscriberByID } from "../../services/SubscriberService"
 import { ModalActionPerformed } from "../../components/ModalActionPerformed/ModalActionPerformed"
 import { getDocumentType } from "../../services/DocumentTypeService"
@@ -55,11 +55,11 @@ const SubscribersWindow = () => {
                 <div className="search-subscriber">
                     <input type="number" placeholder="Nº del documento del suscriptor" className="input-id-subscriber" value={idSubscriber} onChange={(e) => setIdSubscriber(e.target.value)} />
                     <button onClick={handleClickSearchSubscriber} className="button-search-subscribers">
-                        <img src={searchIcon} alt="" width={30} height={30} fill={defaultIconsColor} />
+                        <img src={searchIcon} alt="" width={40} height={40} fill={defaultIconsColor} />
                     </button>
                 </div>
                 <button onClick={handleClickAddSubscriber} className="button-register-new-subscriber">
-                    <img src={addSubscriberIcon} width={30} height={30} fill={defaultIconsColor} className="add-subscriber-icon-button"></img>
+                    <img src={addSubscriberIcon} alt="" width={40} height={40} fill={defaultIconsColor} className="add-subscriber-icon-button"></img>
                     <p>Registrar suscriptor</p>
                 </button>
             </div>
