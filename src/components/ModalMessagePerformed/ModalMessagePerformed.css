@@ -1,0 +1,26 @@
+.p-modal {
+    margin: 0;
+    font-size: var(--text-size);
+    font-weight: bold;
+}
+
+.p-modal-message {
+    margin: 0;
+    font-size: var(--text-size);
+}
+
+.button-group {
+    display: block;
+}
+
+.accept-modal-button {
+    padding-inline: 30px;
+    padding-block: 10px;
+}
+
+.cancel-modal-button {
+    background-color: var(--red);
+    padding-inline: 30px;
+    padding-block: 10px;
+    margin-left: 10px;
+}

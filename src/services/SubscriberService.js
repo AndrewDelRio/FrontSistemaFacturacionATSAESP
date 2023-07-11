@@ -5,12 +5,12 @@ let subscriber = {}
 
 export const getSubscriberByID = (idSubscriber) => new Promise((resolve, reject) => {
     const config = {
-        Headers: {
+        headers: {
             token: sessionStorage.getItem('token')
         }
     }
 
-    axios.get(environment.APIHost + '/getSubscriber' + idSubscriber, config).then(
+    axios.get(environment.APIHost + '/getSubscriber/' + idSubscriber, config).then(
         res => {
             if (res.data.ok) {
                 subscriber = res.data.result

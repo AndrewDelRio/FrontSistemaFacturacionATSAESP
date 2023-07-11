@@ -7,7 +7,7 @@ import searchIcon from "../../assets/images/search.svg"
 import warningIcon from "../../assets/images/warning.svg"
 import addSubscriberIcon from "../../assets/images/addSubscriber.svg"
 import { getSubscriberByID } from "../../services/SubscriberService"
-import { ModalActionPerformed } from "../../components/ModalActionPerformed/ModalActionPerformed"
+import { ModalMessagePerformed } from "../../components/ModalMessagePerformed/ModalMessagePerformed"
 import { getDocumentType } from "../../services/DocumentTypeService"
 const defaultIconsColor = "#FFFFFF"
 
@@ -23,7 +23,7 @@ const SubscribersWindow = () => {
             getSubscriberByID(idSubscriber).then(
                 res => {
                     if (res) {
-                        navigate('/secretary/subscriber' + idSubscriber)
+                        navigate('/secretary/subscriber/' + idSubscriber)
                     } else {
                         setModalNotFoundState(!modalNotFoundState)
                     }
@@ -63,7 +63,7 @@ const SubscribersWindow = () => {
                     <p>Registrar suscriptor</p>
                 </button>
             </div>
-            <ModalActionPerformed
+            <ModalMessagePerformed
                 img={warningIcon}
                 title={"Suscriptor no encontrado"}
                 state={modalNotFoundState}

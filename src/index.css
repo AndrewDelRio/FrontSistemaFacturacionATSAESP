@@ -1,6 +1,8 @@
 :root {
   --blue: #0068f9;
   --light-blue: #3775C9;
+  --light-blue-opaque-color-80: #3775C9CC;
+  --light-blue-opaque-color-10: #3775C911;
   --white: #F9FBFD;
   --yellow: #F7C606;
   --green: #057D06;
