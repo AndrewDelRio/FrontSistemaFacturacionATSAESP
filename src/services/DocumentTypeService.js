@@ -5,7 +5,7 @@ let documentTypes = [];
 
 export const getDocumentType = () => new Promise((resolve, reject) => {
     const config = {
-        Headers: {
+        headers: {
             token: sessionStorage.getItem('token')
         }
     }

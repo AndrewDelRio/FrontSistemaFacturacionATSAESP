@@ -38,7 +38,7 @@ const SubscribersWindow = () => {
         getDocumentType().then(
             res => {
                 if (res) {
-                    navigate('secretary/register-subscriber')
+                    navigate('register-subscriber')
                 }
             }).catch(
                 err => {
