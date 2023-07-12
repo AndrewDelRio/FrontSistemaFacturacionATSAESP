@@ -3,7 +3,7 @@ import { environment } from "../environment/Environment"
 
 let documentTypes = [];
 
-export const getDocumentType = () => new Promise((resolve, reject) => {
+export const getDocumentTypeValues = () => new Promise((resolve, reject) => {
     const config = {
         headers: {
             token: sessionStorage.getItem('token')

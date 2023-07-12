@@ -8,7 +8,7 @@ import warningIcon from "../../assets/images/warning.svg"
 import addSubscriberIcon from "../../assets/images/addSubscriber.svg"
 import { getSubscriberByID } from "../../services/SubscriberService"
 import { ModalMessagePerformed } from "../../components/ModalMessagePerformed/ModalMessagePerformed"
-import { getDocumentType } from "../../services/DocumentTypeService"
+import { getDocumentTypeValues } from "../../services/DocumentTypeService"
 const defaultIconsColor = "#FFFFFF"
 
 const SubscribersWindow = () => {
@@ -35,7 +35,7 @@ const SubscribersWindow = () => {
     }
 
     const handleClickAddSubscriber = () => {
-        getDocumentType().then(
+        getDocumentTypeValues().then(
             res => {
                 if (res) {
                     navigate('register-subscriber')
