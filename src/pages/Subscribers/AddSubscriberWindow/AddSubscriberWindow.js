@@ -19,7 +19,6 @@ export function AddSubscriberWindow() {
 
     documentTypes = getDocumentTypeValues();
     genders = getGenderList();
-    console.log(genders);
 
     const [modalState, changeModalState] = useState(false);
     const [modalWarningState, changeModalWarningState] = useState(false);

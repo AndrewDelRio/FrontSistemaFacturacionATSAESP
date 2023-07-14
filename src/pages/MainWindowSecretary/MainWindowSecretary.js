@@ -4,7 +4,8 @@ import MainNavBarSecretary from "../../components/MainNavBarSecretary/MainNavBar
 import Welcome from "../../components/Welcome/Welcome";
 import SubscribersWindow from "../Subscribers/SubscribersWindow/SubscribersWindow"
 import { SubscriberWindow } from "../Subscribers/SubscriberWindow/SubscriberWindow";
-import { AddSubscriberWindow } from "../Subscribers/AddSubscriberWindow/AddSubscriberWindow"
+import { AddSubscriberWindow } from "../Subscribers/AddSubscriberWindow/AddSubscriberWindow";
+import { EditSubscriberWindow } from "../Subscribers/EditSubscriberWindow/EditSubscriberWindow";
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -16,6 +17,7 @@ const MainWindowSecretary = () => {
                 <Route path="subscribers" element={<SubscribersWindow />} />
                 <Route path="subscriber/:idSubscriber" element={<SubscriberWindow />} />
                 <Route path="register-subscriber" element={<AddSubscriberWindow />} />
+                <Route path="edit-subscriber/:id_subscriber" element={<EditSubscriberWindow />} />
             </Routes>
         </div>
     )

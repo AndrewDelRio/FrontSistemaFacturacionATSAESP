@@ -25,7 +25,7 @@ export function SubscriberWindow() {
     }
 
     const handleClickEditSubscribers = () => {
-        navigate('edit-subscriber/' + subscriber.id_subscriber)
+        navigate('/secretary/edit-subscriber/' + subscriber.id_subscriber)
     }
 
     const handleClickEnrollment = (idEnrollment) => {
