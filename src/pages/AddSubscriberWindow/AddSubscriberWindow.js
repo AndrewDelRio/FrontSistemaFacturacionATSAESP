@@ -140,20 +140,24 @@ export function AddSubscriberWindow() {
                     >
                         {documentTypes.map(documentType => {
                             return (
-                                <option key={documentType.id_document_type} value={documentType.id_document_type}>{documentType.document_type_name + " (" + documentType.document_type_abbreviation + ")"}
+                                <option key={documentType.id_document_type}
+                                    value={documentType.id_document_type}>
+                                    {documentType.document_type_name + " (" + documentType.document_type_abbreviation + ")"}
                                 </option>
                             )
                         })}
                     </select>
                 </div>
+                <div id="expedition-date" >
+                    <p>Fecha de expedición del documento *</p>
+                    <input className="input-info-subscriber" type="date" value={expeditionDateState} onChange={(e) => setExpeditionDateState(e.target.value)} />
+                </div>
                 <div>
                     <p>Número de documento *</p>
                     <input className="input-info-subscriber" type="number" value={documentNumberState} onChange={(e) => setDocumentNumberState(e.target.value)} />
                 </div>
-                <div id="expedition-date" >
-                    <p>Fecha de expedición del documento *</p>
-                    <input className="input-info-subscriber" type="date" value={expeditionDateState} onChange={(e) => setExpeditionDateState(e.target.value)} width={300} />
-                </div>
+
+
                 <div id="birthdate">
                     <p>Fecha de nacimiento *</p>
                     <input className="input-info-subscriber" type="date" value={birthdayState} onChange={(e) => setBirthdayState(e.target.value)} />
