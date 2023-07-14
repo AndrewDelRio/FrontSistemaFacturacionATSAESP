@@ -1,15 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import addSubscriberIcon from "../../assets/images/addSubscriber.svg"
-import warningIcon from "../../assets/images/warning.svg"
-import { ModalMessagePerformed } from "../../components/ModalMessagePerformed/ModalMessagePerformed"
-import { getDocumentTypeValues } from "../../services/DocumentTypeService";
-import { getGenderList } from "../../services/GenderService";
-import { addSubscriber } from "../../services/SubscriberService";
-import { validateEmail, validateNames } from "../../validations/ValidateForms";
-import ControlButton from "../../components/ControlButton/ControlButton";
-import { ModalActionPerformed } from "../../components/ModalActionPerformed/ModalActionPerformed";
+import addSubscriberIcon from "../../../assets/images/addSubscriber.svg"
+import warningIcon from "../../../assets/images/warning.svg"
+import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
+import { getDocumentTypeValues } from "../../../services/DocumentTypeService";
+import { getGenderList } from "../../../services/GenderService";
+import { addSubscriber } from "../../../services/SubscriberService";
+import { validateEmail, validateNames } from "../../../validations/ValidateForms";
+import ControlButton from "../../../components/ControlButton/ControlButton";
+import { ModalActionPerformed } from "../../../components/ModalActionPerformed/ModalActionPerformed";
 import "./AddSubscriberWindow.css";
 
 let documentTypes = [];

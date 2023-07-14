@@ -2,14 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SubscribersWindow.css"
-import subscriberIcon from "../../assets/images/subscribers.svg"
-import searchIcon from "../../assets/images/search.svg"
-import warningIcon from "../../assets/images/warning.svg"
-import addSubscriberIcon from "../../assets/images/addSubscriber.svg"
-import { getSubscriberByID } from "../../services/SubscriberService"
-import { ModalMessagePerformed } from "../../components/ModalMessagePerformed/ModalMessagePerformed"
-import { getDocumentType } from "../../services/DocumentTypeService"
-import { getGenders } from "../../services/GenderService";
+import subscriberIcon from "../../../assets/images/subscribers.svg"
+import searchIcon from "../../../assets/images/search.svg"
+import warningIcon from "../../../assets/images/warning.svg"
+import addSubscriberIcon from "../../../assets/images/addSubscriber.svg"
+import { getSubscriberByID } from "../../../services/SubscriberService"
+import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
+import { getDocumentType } from "../../../services/DocumentTypeService"
+import { getGenders } from "../../../services/GenderService";
 const defaultIconsColor = "#FFFFFF"
 
 const SubscribersWindow = () => {

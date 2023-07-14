@@ -2,9 +2,9 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import MainNavBarSecretary from "../../components/MainNavBarSecretary/MainNavBarSecretary";
 import Welcome from "../../components/Welcome/Welcome";
-import SubscribersWindow from "../SubscribersWindow/SubscribersWindow"
-import { SubscriberWindow } from "../SubscriberWindow/SubscriberWindow";
-import { AddSubscriberWindow } from "../AddSubscriberWindow/AddSubscriberWindow"
+import SubscribersWindow from "../Subscribers/SubscribersWindow/SubscribersWindow"
+import { SubscriberWindow } from "../Subscribers/SubscriberWindow/SubscriberWindow";
+import { AddSubscriberWindow } from "../Subscribers/AddSubscriberWindow/AddSubscriberWindow"
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
