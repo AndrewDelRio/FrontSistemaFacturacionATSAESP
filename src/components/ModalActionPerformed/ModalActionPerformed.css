@@ -14,13 +14,14 @@
 }
 
 .accept-modal-button {
+    width: auto;
     padding-inline: 30px;
     padding-block: 10px;
 }
 
 .cancel-modal-button {
+    width: auto;
     background-color: var(--red);
-    padding-inline: 30px;
+    padding-inline: 15px;
     padding-block: 10px;
-    margin-left: 10px;
 }

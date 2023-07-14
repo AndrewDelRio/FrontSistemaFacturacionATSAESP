@@ -29,7 +29,7 @@ export const getSubscriber = () => {
 
 export const addSubscriber = (newSubscriber) => new Promise((resolve, reject) => {
     const config = {
-        Headers: {
+        headers: {
             token: sessionStorage.getItem('token')
         }
     }

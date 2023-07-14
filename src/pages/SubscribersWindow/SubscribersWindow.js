@@ -8,7 +8,8 @@ import warningIcon from "../../assets/images/warning.svg"
 import addSubscriberIcon from "../../assets/images/addSubscriber.svg"
 import { getSubscriberByID } from "../../services/SubscriberService"
 import { ModalMessagePerformed } from "../../components/ModalMessagePerformed/ModalMessagePerformed"
-import { getDocumentTypeValues } from "../../services/DocumentTypeService"
+import { getDocumentType } from "../../services/DocumentTypeService"
+import { getGenders } from "../../services/GenderService";
 const defaultIconsColor = "#FFFFFF"
 
 const SubscribersWindow = () => {
@@ -35,10 +36,15 @@ const SubscribersWindow = () => {
     }
 
     const handleClickAddSubscriber = () => {
-        getDocumentTypeValues().then(
+        getDocumentType().then(
             res => {
                 if (res) {
-                    navigate('register-subscriber')
+                    getGenders().then(res => {
+                        if (res) {
+                            navigate('/secretary/register-subscriber')
+                        }
+                    })
+
                 }
             }).catch(
                 err => {

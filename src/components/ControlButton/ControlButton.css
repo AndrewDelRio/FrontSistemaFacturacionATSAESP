@@ -3,11 +3,14 @@
 }
 
 .accept-button {
+    width: auto;
     padding-block: 10px;
     padding-inline: 30px;
+    margin-right: 50px;
 }
 
 .back-button {
+    width: auto;
     background-color: var(--red);
     padding-block: 10px;
     padding-inline: 30px;

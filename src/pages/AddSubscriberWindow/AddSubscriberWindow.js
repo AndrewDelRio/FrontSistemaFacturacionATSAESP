@@ -9,6 +9,7 @@ import { getGenderList } from "../../services/GenderService";
 import { addSubscriber } from "../../services/SubscriberService";
 import { validateEmail, validateNames } from "../../validations/ValidateForms";
 import ControlButton from "../../components/ControlButton/ControlButton";
+import { ModalActionPerformed } from "../../components/ModalActionPerformed/ModalActionPerformed";
 import "./AddSubscriberWindow.css";
 
 let documentTypes = [];
@@ -18,6 +19,7 @@ export function AddSubscriberWindow() {
 
     documentTypes = getDocumentTypeValues();
     genders = getGenderList();
+    console.log(genders);
 
     const [modalState, changeModalState] = useState(false);
     const [modalWarningState, changeModalWarningState] = useState(false);
@@ -31,6 +33,7 @@ export function AddSubscriberWindow() {
     const [modalAddressErrorState, changeModalAddressErrorState] = useState(false);
     const [modalEmailAddressErrorState, changeModalEmailAddressErrorState] = useState(false);
     const [modalPhoneNumberErrorState, changeModalPhoneNumberErrorState] = useState(false);
+    const [modalStateBack, changeModalbackToPage] = useState(false);
 
     const [documentTypeState, setDocumentTypeState] = useState(documentTypes.length > 0 ? documentTypes[0].id_document_type : '')
     const [gendersState, setGendersState] = useState(genders.length > 0 ? genders[0] : '')
@@ -43,15 +46,25 @@ export function AddSubscriberWindow() {
     const [emailState, setEmailState] = useState("")
     const [phoneState, setPhoneState] = useState("")
 
+
     const navigate = useNavigate()
 
     const handleClickAddSubscriber = (e) => {
         e.preventDefault();
-        if (documentNumberState === "" ||
+        const timestamp1 = Date.parse(birthdayState);
+        const timestamp2 = Date.parse(expeditionDateState);
+        if (timestamp1 === timestamp2) {
+            changeModalBirthdateErrorState(!modalBirthdateErrorState);
+        } else if (timestamp1 >= timestamp2) {
+            changeModalDocumentExpeditionDateErrorState(!modalDocumentExpeditionDateErrorState);
+        }
+        else if (documentNumberState === "" ||
             nameState === "" ||
             lastnamesState === "" ||
             addressState === "" ||
-            documentTypeState === "") {
+            documentTypeState === "" ||
+            expeditionDateState === "" ||
+            birthdayState === "") {
             changeModalWarningState(!modalWarningState)
         } else if (documentNumberState < 1 || documentNumberState > 9999999999) {
             changeModalDocumentErrorState(!modalDocumentErrorState)
@@ -63,7 +76,8 @@ export function AddSubscriberWindow() {
             changeModalEmailAddressErrorState(!modalEmailAddressErrorState)
         } else if ((phoneState < 3000000000 || phoneState >= 4000000000) && phoneState !== '') {
             changeModalPhoneNumberErrorState(!modalPhoneNumberErrorState)
-        } else if (documentNumberState !== "" && nameState !== "" && lastnamesState !== "" && addressState !== "" && documentTypeState !== "") {
+        }
+        else if (documentNumberState !== "" && nameState !== "" && lastnamesState !== "" && addressState !== "" && documentTypeState !== "") {
             const newSubscriber = {
                 id_subscriber: documentNumberState === "" ? null : documentNumberState,
                 document_expedition_date: expeditionDateState === "" ? null : expeditionDateState,
@@ -90,6 +104,11 @@ export function AddSubscriberWindow() {
         }
     }
 
+
+    const handleClickBackButton = () => {
+        changeModalbackToPage(!modalStateBack);
+    }
+
     const handleClickBackToSubscribers = () => {
         navigate('/secretary/subscribers')
     }
@@ -106,72 +125,79 @@ export function AddSubscriberWindow() {
         changeModalExistState(!modalExistState)
     }
 
+
+
     return (
         <div className="add-subscriber">
             <img src={addSubscriberIcon} alt="" width={100} className="add-subscriber-icon"></img>
             <p>Nuevo suscriptor</p>
             <div className="add-form">
-                <p>Tipo de Documento *</p>
-                <select className="input-info-subscriber" value={documentTypeState} onChange={(e) => setDocumentTypeState(e.target.value)}>
-                    {documentTypeState.map(documentType => {
-                        return (
-                            <option key={documentType.id_document_type} value={documentType.id_document_type}>{documentType.document_type_abbreviation}
-                            </option>
-                        )
-                    })}
-                </select>
-            </div>
-            <div>
-                <p>Número de documento *</p>
-                <input className="input-info-subscriber" type="number" value={documentNumberState} onChange={(e) => setDocumentNumberState(e.target.value)} />
-            </div>
-            <div>
-                <p>Fecha de expedición del documento *</p>
-                <input className="input-info-subscriber" type="date" value={expeditionDateState} onChange={(e) => setExpeditionDateState(e.target.value)}></input>
-            </div>
-            <div>
-                <p>Fecha de nacimiento *</p>
-                <input className="input-info-subscriber" type="date" value={birthdayState} onChange={(e) => setBirthdayState(e.target.value)}></input>
-            </div>
-            <div>
-                <p>Apellido(s) *</p>
-                <input className="input-info-subscriber" type="text" value={lastnamesState} onChange={(e) => setLastnamesState(e.target.value)}></input>
-            </div>
-            <div>
-                <p>Nombre(s) *</p>
-                <input className="input-info-subscriber" type="text" value={nameState} onChange={(e) => setNamesState(e.target.value)}></input>
-            </div>
-            <div>
-                <p>Género *</p>
-                <select className="input-info-subscriber"
-                    value={gendersState}
-                    onChange={(e) => setGendersState(e.target.value)}
-                >
-                    {genders.map(gender => {
-                        return (
-                            <option key={gender} value={gender}>{gender}</option>
-                        )
-                    })}
-                </select>
-            </div>
-            <div>
-                <p>Dirección *</p>
-                <input className="input-info-subscriber" value={addressState} onChange={(e) => setAddressState(e.target.value)}></input>
-            </div>
-            <div>
-                <p>Correo electrónico *</p>
-                <input className="input-info-subscriber" value={emailState} onChange={(e) => setEmailState(e.target.value)}></input>
-            </div>
-            <div>
-                <p>Teléfono *</p>
-                <input className="input-info-subscriber" value={phoneState} onChange={(e) => setPhoneState(e.target.value)}></input>
+                <div>
+                    <p>Tipo de Documento *</p>
+                    <select className="input-info-subscriber"
+                        value={documentTypeState}
+                        onChange={(e) => setDocumentTypeState(e.target.value)}
+                    >
+                        {documentTypes.map(documentType => {
+                            return (
+                                <option key={documentType.id_document_type} value={documentType.id_document_type}>{documentType.document_type_name + " (" + documentType.document_type_abbreviation + ")"}
+                                </option>
+                            )
+                        })}
+                    </select>
+                </div>
+                <div>
+                    <p>Número de documento *</p>
+                    <input className="input-info-subscriber" type="number" value={documentNumberState} onChange={(e) => setDocumentNumberState(e.target.value)} />
+                </div>
+                <div id="expedition-date" >
+                    <p>Fecha de expedición del documento *</p>
+                    <input className="input-info-subscriber" type="date" value={expeditionDateState} onChange={(e) => setExpeditionDateState(e.target.value)} width={300} />
+                </div>
+                <div id="birthdate">
+                    <p>Fecha de nacimiento *</p>
+                    <input className="input-info-subscriber" type="date" value={birthdayState} onChange={(e) => setBirthdayState(e.target.value)} />
+                </div>
+                <div>
+                    <p>Apellido(s) *</p>
+                    <input className="input-info-subscriber" type="text" value={lastnamesState} onChange={(e) => setLastnamesState(e.target.value)}></input>
+                </div>
+                <div>
+                    <p>Nombre(s) *</p>
+                    <input className="input-info-subscriber" type="text" value={nameState} onChange={(e) => setNamesState(e.target.value)}></input>
+                </div>
+                <div>
+                    <p>Género *</p>
+                    <select className="input-info-subscriber"
+                        value={gendersState}
+                        onChange={(e) => setGendersState(e.target.value)}
+                    >
+                        {genders.map(gender => {
+                            return (
+                                <option key={gender} value={gender}>{gender}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                <div>
+                    <p>Dirección *</p>
+                    <input className="input-info-subscriber" type="text" value={addressState} onChange={(e) => setAddressState(e.target.value)}></input>
+                </div>
+                <div>
+                    <p>Correo electrónico *</p>
+                    <input className="input-info-subscriber" type="text" value={emailState} onChange={(e) => setEmailState(e.target.value)}></input>
+                </div>
+                <div>
+                    <p>Teléfono *</p>
+                    <input className="input-info-subscriber" type="number" value={phoneState} onChange={(e) => setPhoneState(e.target.value)}></input>
+                </div>
             </div>
             <div className="control-button">
                 <ControlButton
                     titleAceptButton="Registrar"
                     titleBackButton="Volver"
                     acceptFunction={handleClickAddSubscriber}
-                    backFunction={handleClickBackToSubscribers}
+                    backFunction={() => { changeModalbackToPage(!modalStateBack) }}
                 />
             </div>
             <ModalMessagePerformed
@@ -190,46 +216,62 @@ export function AddSubscriberWindow() {
             />
             <ModalMessagePerformed
                 img={warningIcon}
-                title="Aviso"
+                title="Error"
                 message="Error al agregar el suscriptor"
                 state={modalErrorState}
                 accept={handleClickAddSubscribersError}
             />
             <ModalMessagePerformed
                 img={warningIcon}
-                title="Aviso"
-                message="El suscriptor ya existe"
+                title="Error"
+                message="El suscriptor ya existe en el sistema"
                 state={modalExistState}
                 accept={handleClickAddSubscriberExist}
             />
             <ModalMessagePerformed
                 img={warningIcon}
-                title="Aviso"
+                title="Error"
                 message="Número de documento invalido"
                 state={modalDocumentErrorState}
                 accept={() => { changeModalDocumentErrorState(!modalDocumentErrorState) }}
             />
             <ModalMessagePerformed
                 img={warningIcon}
-                title="Aviso"
+                title="Error"
                 message="El campo 'Apellido(s)' es obligatorio"
                 state={modalLastnamesErrorState}
                 accept={() => { changeModalLastnamesErrorState(!modalLastnamesErrorState) }}
             />
             <ModalMessagePerformed
                 img={warningIcon}
-                title="Aviso"
+                title="Error"
                 message="El campo 'Nombre(s)' es obligatorio"
                 state={modalNamesErrorState}
                 accept={() => { changeModalNamesErrorState(!modalNamesErrorState) }}
             />
             <ModalMessagePerformed
                 img={warningIcon}
-                title="Aviso"
+                title="Error"
                 message="El campo 'Correo electrónico' es obligatorio"
                 state={modalEmailAddressErrorState}
                 accept={() => { changeModalEmailAddressErrorState(!modalEmailAddressErrorState) }}
             />
+            <ModalMessagePerformed
+                img={warningIcon}
+                title="Error"
+                message="La fecha de nacimiento es mayor a la fecha de expedición del documento"
+                state={modalDocumentExpeditionDateErrorState}
+                accept={() => { changeModalDocumentExpeditionDateErrorState(!modalDocumentExpeditionDateErrorState) }}
+            />
+
+            <ModalMessagePerformed
+                img={warningIcon}
+                title="Error"
+                message="La Fecha de nacimiento es igual a la Fecha de expedición del documento"
+                state={modalBirthdateErrorState}
+                accept={() => { changeModalBirthdateErrorState(!modalBirthdateErrorState) }}
+            />
+
             <ModalMessagePerformed
                 img={warningIcon}
                 title="Aviso"
@@ -243,6 +285,14 @@ export function AddSubscriberWindow() {
                 message="El campo 'Teléfono' es obligatorio"
                 state={modalPhoneNumberErrorState}
                 accept={() => { changeModalPhoneNumberErrorState(!modalPhoneNumberErrorState) }}
+            />
+            <ModalActionPerformed
+                img={warningIcon}
+                title={"¿Deseas salir?"}
+                message={"¡¡Se perderá toda la información sin guardar!!"}
+                state={modalStateBack}
+                accept={handleClickBackToSubscribers}
+                cancel={handleClickBackButton}
             />
         </div>
     )

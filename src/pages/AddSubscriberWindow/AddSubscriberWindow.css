@@ -7,13 +7,6 @@
     row-gap: 10px;
 }
 
-.button-back {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 10px;
-}
-
 .add-subscriber-icon {
     margin-top: 20px;
 }
@@ -38,20 +31,16 @@
 }
 
 .add-form>div>p {
+    font-weight: bold;
     margin: 0;
     font-size: var(--text-form-size);
 }
 
 .input-info-subscriber {
-    width: 320px;
-    border: solid 2px;
+    width: 350px;
+    border: gray solid 2px;
     border-radius: 10px;
     font-size: var(--text-size);
     padding-inline: 10px;
     padding-block: 5px;
-}
-
-.register-button {
-    padding-inline: 20px;
-    padding-block: 10px;
 }

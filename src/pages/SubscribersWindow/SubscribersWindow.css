@@ -36,7 +36,7 @@
 }
 
 .input-id-subscriber {
-    width: 300px;
+    width: 400px;
     border: 2px solid;
     border-radius: 10px;
     font-size: var(--text-size);
@@ -58,7 +58,7 @@
     column-gap: 10px;
     padding-block: 10px;
     padding-inline: 20px;
-    margin: 50px;
+    margin: 1%;
 }
 
 .button-register-new-subscriber>p {
