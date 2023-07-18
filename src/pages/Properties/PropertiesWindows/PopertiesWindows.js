@@ -54,11 +54,11 @@ export function PropertiesWindows() {
                 <div className='search-enrollment'>
                     <input type='number' placeholder='Nº de predio' className='input-id-enrollment' value={idProperty} onChange={(e => { setIdProperty(e.target.value) })}></input>
                     <button onClick={handleClickSearchProperty} className='button-search-properties'>
-                        <img src={searchIcon} alt='' width={30} height={30} fill={defaultIconsColor}></img>
+                        <img src={searchIcon} alt='' width={40} height={40} fill={defaultIconsColor}></img>
                     </button>
                 </div>
                 <button onClick={handleClickAddProperty} className='button-register-properties'>
-                    <img src={addPropertyIcon} alt='' width={30} height={30} fill={defaultIconsColor} className='add-enrollment-icon-button'></img>
+                    <img src={addPropertyIcon} alt='' width={40} height={40} fill={defaultIconsColor} className='add-enrollment-icon-button'></img>
                     <p>Registrar predio</p>
                 </button>
             </div>
