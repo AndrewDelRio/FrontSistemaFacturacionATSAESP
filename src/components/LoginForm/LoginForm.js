@@ -77,7 +77,7 @@ const LoginForm = ({ forgotPassword }) => {
     }
     return (
         <div className="login-form">
-            <p className="login-title"><b>Inicar sesión</b></p>
+            <p className="login-title"><b>Iniciar sesión</b></p>
             {
                 (invalidAuth &&
                     <p className="auth-error-message">¡¡Usuario o contraseña incorrecta!!</p>) ||
@@ -85,7 +85,7 @@ const LoginForm = ({ forgotPassword }) => {
                     noActiveAuth &&
                     <p className="no-active-error-message">¡¡Usuario no activo en el sistema!!</p>) ||
                 (outOfTimeAuth &&
-                    <p className="out-of-time-error-message">¡¡No tienes permiso para acceder fuera del horario permitido!!</p>)
+                    <p className="out-of-time-error-message">¡¡No tienes permiso para acceder fuera del horario establecido!!</p>)
             }
             <div className="input-login">
                 <img src={userIcon} width={30} alt=""></img>

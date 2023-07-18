@@ -4,17 +4,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 10px;
+    row-gap: 2px;
 }
 
 .add-subscriber-icon {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .add-subscriber>p {
     margin: 0;
     padding: 0;
-    font-size: var(--title-size);
+    font-size: var(--title-small-size);
 }
 
 .add-subscriber>p {
@@ -23,24 +23,139 @@
 }
 
 .add-form {
+    width: 90%;
     display: grid;
-    grid-template-columns: repeat(2, auto);
-    row-gap: 10px;
-    column-gap: 40px;
-    padding: 10px;
+    grid-template-columns: repeat(1, auto);
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
 }
 
-.add-form>div>p {
+/**
+etiqueta de los titulos del formulario agregar
+**/
+.add-form>p {
+    margin: 0;
     font-weight: bold;
+    text-align: left;
+}
+
+.input-info-subscriber {
+    width: 300px;
+    border: gray solid 2px;
+    border-radius: 10px;
+    font-size: var(--text-form-size);
+    padding-inline: 10px;
+    padding-block: 5px;
+}
+
+.input-expedition-place {
+    width: 350px;
+    border: gray solid 2px;
+    border-radius: 10px;
+    font-size: var(--nav-bar-text-size-info-system);
+    padding-inline: 10px;
+    padding-block: 5px;
+    resize: none;
+}
+
+.document-identification-container {
+    border: var(--light-blue) solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 5px;
+}
+
+.document-identification-container>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size);
+}
+
+.address-property-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    resize: none;
+}
+
+.address-property-container>p {
     margin: 0;
     font-size: var(--text-form-size);
 }
 
-.input-info-subscriber {
-    width: 350px;
-    border: gray solid 2px;
+.address-property-container>div {
+    width: 65%;
+    min-width: 65%;
+    max-width: 65%;
+    resize: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    border: solid gray 2px;
     border-radius: 10px;
-    font-size: var(--text-size);
-    padding-inline: 10px;
-    padding-block: 5px;
+    padding: 5px;
+}
+
+.address-property-container>div>div>select {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.address-property-container>div>div>p {
+    margin: 0;
+    font-size: var(--text-form-size);
+    font-weight: lighter;
+}
+
+.add-form>div {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    margin-top: 0px;
+}
+
+.personal-data-containers {
+    border: var(--light-blue) solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    row-gap: 0px;
+    column-gap: 0px;
+    padding: 5px;
+}
+
+.personal-data-containers>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size);
+}
+
+.contact-dates-container {
+    border: var(--light-blue) solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 5px;
+}
+
+.contact-dates-container>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size);
+}
+
+.control-button {
+    width: 100%;
+    justify-content: center;
+    justify-items: center;
 }

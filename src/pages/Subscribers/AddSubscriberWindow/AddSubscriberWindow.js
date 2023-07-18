@@ -7,19 +7,23 @@ import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed
 import { getDocumentTypeValues } from "../../../services/DocumentTypeService";
 import { getGenderList } from "../../../services/GenderService";
 import { addSubscriber } from "../../../services/SubscriberService";
+import { getDepartmentsList } from "../../../services/PlacesService";
 import { validateEmail, validateNames } from "../../../validations/ValidateForms";
 import ControlButton from "../../../components/ControlButton/ControlButton";
 import { ModalActionPerformed } from "../../../components/ModalActionPerformed/ModalActionPerformed";
 import "./AddSubscriberWindow.css";
 
 let documentTypes = [];
-let genders = []
+let genders = [];
+let departmentList = [];
+let municipalityList = [];
 
 export function AddSubscriberWindow() {
 
     documentTypes = getDocumentTypeValues();
     genders = getGenderList();
-
+    departmentList = getDepartmentsList();
+    municipalityList = ['Seleccione']
     const [modalState, changeModalState] = useState(false);
     const [modalWarningState, changeModalWarningState] = useState(false);
     const [modalErrorState, changeModalErrorState] = useState(false);
@@ -44,6 +48,8 @@ export function AddSubscriberWindow() {
     const [addressState, setAddressState] = useState("")
     const [emailState, setEmailState] = useState("")
     const [phoneState, setPhoneState] = useState("")
+    const [departmentState, setDepartmentState] = useState(-1)
+    const [municipalityState, setMunicipalityState] = useState(-1)
 
 
     const navigate = useNavigate()
@@ -83,7 +89,7 @@ export function AddSubscriberWindow() {
                 birthdate_subscriber: birthdayState === "" ? null : birthdayState,
                 lastnames_subscriber: lastnamesState === "" ? null : lastnamesState,
                 names_subscriber: nameState === "" ? null : nameState,
-                place_expedition_document: "",
+                place_expedition_document: municipalityState + ' - ' + departmentList[departmentState].department_name,
                 gender_subscriber: gendersState === "" ? null : gendersState,
                 address_subscriber: addressState === "" ? null : addressState,
                 email_subscriber: emailState === "" ? null : emailState,
@@ -102,7 +108,6 @@ export function AddSubscriberWindow() {
             })
         }
     }
-
 
     const handleClickBackButton = () => {
         changeModalbackToPage(!modalStateBack);
@@ -124,84 +129,138 @@ export function AddSubscriberWindow() {
         changeModalExistState(!modalExistState)
     }
 
-
+    const handleLoadCities = function (e) {
+        const option = e.target.value;
+        setDepartmentState(option);
+        console.log(departmentState);
+    }
 
     return (
         <div className="add-subscriber">
-            <img src={addSubscriberIcon} alt="" width={100} className="add-subscriber-icon"></img>
+            <img src={addSubscriberIcon} alt="" width={50} className="add-subscriber-icon"></img>
             <p>Nuevo suscriptor</p>
             <div className="add-form">
-                <div>
-                    <p>Tipo de Documento *</p>
-                    <select className="input-info-subscriber"
-                        value={documentTypeState}
-                        onChange={(e) => setDocumentTypeState(e.target.value)}
-                    >
-                        {documentTypes.map(documentType => {
-                            return (
-                                <option key={documentType.id_document_type}
-                                    value={documentType.id_document_type}>
-                                    {documentType.document_type_name + " (" + documentType.document_type_abbreviation + ")"}
-                                </option>
-                            )
-                        })}
-                    </select>
+                <p>Documento de identificación</p>
+                <div className="document-identification-container">
+                    <div>
+                        <p>Tipo de Documento *</p>
+                        <select className="input-info-subscriber"
+                            value={documentTypeState}
+                            onChange={(e) => setDocumentTypeState(e.target.value)}
+                        >
+                            {documentTypes.map(documentType => {
+                                return (
+                                    <option key={documentType.id_document_type}
+                                        value={documentType.id_document_type}>
+                                        {documentType.document_type_name + " (" + documentType.document_type_abbreviation + ")"}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                    </div>
+
+                    <div>
+                        <p>Número de documento *</p>
+                        <input className="input-info-subscriber" type="number" value={documentNumberState} onChange={(e) => setDocumentNumberState(e.target.value)} />
+                    </div>
+
+                    <div id="expedition-date" >
+                        <p>Fecha de expedición*</p>
+                        <input className="input-info-subscriber" type="date" value={expeditionDateState} onChange={(e) => setExpeditionDateState(e.target.value)} />
+                    </div>
+                    <div className="address-property-container">
+                        <p>Lugar de expedición *</p>
+                        <div>
+                            <div>
+                                <p>Departamento *</p>
+                                <select className="input-expedition-place"
+                                    value={departmentState}
+                                    onClick={handleLoadCities}
+                                    onChange={(e) => setDepartmentState(e.target.value)}
+
+                                ><option>Seleccione una opción</option>
+                                    {
+                                        departmentList.map((department, i) => {
+                                            return (
+                                                <option key={department.dane_code} value={i}>
+                                                    {department.department_name}
+                                                </option>
+                                            )
+                                        }
+                                        )}
+                                </select>
+                            </div>
+                            <div>
+                                <p>Municipio*</p>
+                                <select className="input-expedition-place"
+                                    value={municipalityState}
+                                    onChange={(e) => setMunicipalityState(e.target.value)}
+                                >
+                                    {
+                                        departmentState > -1 &&
+                                        (
+                                            departmentList[departmentState].cities.map((municipality, i) => (
+                                                <option key={municipality} value={municipality}>{municipality}</option>
+                                            ))
+                                        )
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="expedition-date" >
-                    <p>Fecha de expedición del documento *</p>
-                    <input className="input-info-subscriber" type="date" value={expeditionDateState} onChange={(e) => setExpeditionDateState(e.target.value)} />
-                </div>
-                <div>
-                    <p>Número de documento *</p>
-                    <input className="input-info-subscriber" type="number" value={documentNumberState} onChange={(e) => setDocumentNumberState(e.target.value)} />
+                <p>Datos personales</p>
+                <div className="personal-data-containers">
+                    <div>
+                        <p>Apellido(s) *</p>
+                        <input className="input-info-subscriber" type="text" value={lastnamesState} onChange={(e) => setLastnamesState(e.target.value)}></input>
+                    </div>
+                    <div >
+                        <p>Nombre(s) *</p>
+                        <input className="input-info-subscriber" type="text" value={nameState} onChange={(e) => setNamesState(e.target.value)}></input>
+                    </div>
+                    <div>
+                        <p>Genéro *</p>
+                        <select className="input-info-subscriber"
+                            value={gendersState}
+                            onChange={(e) => setGendersState(e.target.value)}
+                        >
+                            {genders.map(gender => {
+                                return (
+                                    <option key={gender} value={gender}>{gender}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
+                    <div>
+                        <p>Fecha de nacimiento *</p>
+                        <input className="input-info-subscriber" type="date" value={birthdayState} onChange={(e) => setBirthdayState(e.target.value)} />
+                    </div>
                 </div>
 
-
-                <div id="birthdate">
-                    <p>Fecha de nacimiento *</p>
-                    <input className="input-info-subscriber" type="date" value={birthdayState} onChange={(e) => setBirthdayState(e.target.value)} />
+                <p>Datos de contacto</p>
+                <div className="contact-dates-container">
+                    <div>
+                        <p>Dirección *</p>
+                        <input className="input-info-subscriber" type="text" value={addressState} onChange={(e) => setAddressState(e.target.value)}></input>
+                    </div>
+                    <div>
+                        <p>Correo electrónico *</p>
+                        <input className="input-info-subscriber" type="text" value={emailState} onChange={(e) => setEmailState(e.target.value)}></input>
+                    </div>
+                    <div>
+                        <p>Teléfono *</p>
+                        <input className="input-info-subscriber" type="number" value={phoneState} onChange={(e) => setPhoneState(e.target.value)}></input>
+                    </div>
                 </div>
-                <div>
-                    <p>Apellido(s) *</p>
-                    <input className="input-info-subscriber" type="text" value={lastnamesState} onChange={(e) => setLastnamesState(e.target.value)}></input>
+                <div className="control-button">
+                    <ControlButton
+                        titleAceptButton="Registrar"
+                        titleBackButton="Volver"
+                        acceptFunction={handleClickAddSubscriber}
+                        backFunction={() => { changeModalbackToPage(!modalStateBack) }}
+                    />
                 </div>
-                <div>
-                    <p>Nombre(s) *</p>
-                    <input className="input-info-subscriber" type="text" value={nameState} onChange={(e) => setNamesState(e.target.value)}></input>
-                </div>
-                <div>
-                    <p>Género *</p>
-                    <select className="input-info-subscriber"
-                        value={gendersState}
-                        onChange={(e) => setGendersState(e.target.value)}
-                    >
-                        {genders.map(gender => {
-                            return (
-                                <option key={gender} value={gender}>{gender}</option>
-                            )
-                        })}
-                    </select>
-                </div>
-                <div>
-                    <p>Dirección *</p>
-                    <input className="input-info-subscriber" type="text" value={addressState} onChange={(e) => setAddressState(e.target.value)}></input>
-                </div>
-                <div>
-                    <p>Correo electrónico *</p>
-                    <input className="input-info-subscriber" type="text" value={emailState} onChange={(e) => setEmailState(e.target.value)}></input>
-                </div>
-                <div>
-                    <p>Teléfono *</p>
-                    <input className="input-info-subscriber" type="number" value={phoneState} onChange={(e) => setPhoneState(e.target.value)}></input>
-                </div>
-            </div>
-            <div className="control-button">
-                <ControlButton
-                    titleAceptButton="Registrar"
-                    titleBackButton="Volver"
-                    acceptFunction={handleClickAddSubscriber}
-                    backFunction={() => { changeModalbackToPage(!modalStateBack) }}
-                />
             </div>
             <ModalMessagePerformed
                 img={addSubscriberIcon}
@@ -266,7 +325,6 @@ export function AddSubscriberWindow() {
                 state={modalDocumentExpeditionDateErrorState}
                 accept={() => { changeModalDocumentExpeditionDateErrorState(!modalDocumentExpeditionDateErrorState) }}
             />
-
             <ModalMessagePerformed
                 img={warningIcon}
                 title="Error"
@@ -274,7 +332,6 @@ export function AddSubscriberWindow() {
                 state={modalBirthdateErrorState}
                 accept={() => { changeModalBirthdateErrorState(!modalBirthdateErrorState) }}
             />
-
             <ModalMessagePerformed
                 img={warningIcon}
                 title="Aviso"
@@ -299,5 +356,4 @@ export function AddSubscriberWindow() {
             />
         </div>
     )
-
 }

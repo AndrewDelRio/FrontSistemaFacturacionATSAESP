@@ -10,6 +10,7 @@ import { getSubscriberByID } from "../../../services/SubscriberService"
 import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
 import { getDocumentType } from "../../../services/DocumentTypeService"
 import { getGenders } from "../../../services/GenderService";
+import { getDepartmets } from "../../../services/PlacesService"
 const defaultIconsColor = "#FFFFFF"
 
 const SubscribersWindow = () => {
@@ -36,22 +37,27 @@ const SubscribersWindow = () => {
     }
 
     const handleClickAddSubscriber = () => {
-        getDocumentType().then(
-            res => {
-                if (res) {
-                    getGenders().then(res => {
-                        if (res) {
-                            navigate('/secretary/register-subscriber')
-                        }
-                    })
-
-                }
-            }).catch(
-                err => {
+        getDocumentType().then(res => {
+            if (res) {
+                getGenders().then(res => {
+                    if (res) {
+                        getDepartmets().then(res => {
+                            if (res) {
+                                navigate('/secretary/register-subscriber')
+                            }
+                        }).catch(err => {
+                            console.log(err)
+                        })
+                    }
+                }).catch(err => {
                     console.log(err)
-                }
-            )
+                })
+            }
+        }).catch(err => {
+            console.log(err)
+        })
     }
+
 
     return (
         <div className="subscribers">
