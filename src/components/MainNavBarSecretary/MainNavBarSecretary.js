@@ -38,7 +38,6 @@ const MainNavBar = () => {
                                 <p><b>Predios</b></p>
                             </NavLink>
                         </li>
-
                         <li>
                             <NavLink to="/secretary/enrollments" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
                                 <img alt="" src={EnrollmentIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
