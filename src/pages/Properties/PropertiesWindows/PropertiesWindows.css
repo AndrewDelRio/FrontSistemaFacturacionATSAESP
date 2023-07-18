@@ -1,0 +1,74 @@
+.enrollments {
+    width: 85vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: auto;
+}
+
+.enrollments-icon {
+    margin-top: 20px;
+}
+
+.enrollments-title {
+    margin: 0;
+    padding: 0;
+    font-size: var(--title-size);
+    margin-bottom: 120px;
+}
+
+.form-search-enrollment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.search-enrollment {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    padding-inline: 10px;
+}
+
+.input-id-enrollment {
+    width: 400px;
+    border: 2px solid;
+    border-radius: 10px;
+    font-size: var(--text-size);
+    padding: 10px;
+}
+
+.button-search-properties {
+    padding-block: 5px;
+    padding-inline: 5px;
+    margin: 0;
+    background-color: var(--light-blue);
+}
+
+.button-register-properties {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    padding-block: 10px;
+    padding-inline: 20px;
+    margin: 1%;
+}
+
+.button-register-properties>p {
+    margin: 0;
+    padding: 0;
+    font-size: var(--text-size);
+    font-weight: bold;
+}
+
+.add-enrollment-icon-button {
+    margin: 0;
+    padding: 0;
+}
