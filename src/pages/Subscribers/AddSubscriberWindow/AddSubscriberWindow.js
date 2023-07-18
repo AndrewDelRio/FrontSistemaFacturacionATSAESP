@@ -16,14 +16,11 @@ import "./AddSubscriberWindow.css";
 let documentTypes = [];
 let genders = [];
 let departmentList = [];
-let municipalityList = [];
-
 export function AddSubscriberWindow() {
 
     documentTypes = getDocumentTypeValues();
     genders = getGenderList();
     departmentList = getDepartmentsList();
-    municipalityList = ['Seleccione']
     const [modalState, changeModalState] = useState(false);
     const [modalWarningState, changeModalWarningState] = useState(false);
     const [modalErrorState, changeModalErrorState] = useState(false);
