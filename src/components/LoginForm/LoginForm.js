@@ -72,6 +72,7 @@ const LoginForm = ({ forgotPassword }) => {
             }
         }
         ).catch(err => {
+            //Aqui va para mostrar el mensaje de token expirado
             console.log(err)
         })
     }
