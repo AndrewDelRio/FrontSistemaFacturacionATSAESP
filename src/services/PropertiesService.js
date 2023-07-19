@@ -21,3 +21,7 @@ export const getPropertyByID = (idProperty) => new Promise((resolve, reject) => 
         reject(err)
     })
 })
+
+export const getProperty = () => {
+    return property;
+} 

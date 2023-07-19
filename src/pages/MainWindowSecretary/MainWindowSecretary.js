@@ -7,6 +7,7 @@ import { SubscriberWindow } from "../Subscribers/SubscriberWindow/SubscriberWind
 import { AddSubscriberWindow } from "../Subscribers/AddSubscriberWindow/AddSubscriberWindow";
 import { EditSubscriberWindow } from "../Subscribers/EditSubscriberWindow/EditSubscriberWindow";
 import { PropertiesWindows } from "../Properties/PropertiesWindows/PopertiesWindows";
+import { PropertyWindow } from "../Properties/PropertyWindow/PropertyWindow";
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -20,6 +21,7 @@ const MainWindowSecretary = () => {
                 <Route path="register-subscriber" element={<AddSubscriberWindow />} />
                 <Route path="edit-subscriber/:id_subscriber" element={<EditSubscriberWindow />} />
                 <Route path="properties" element={<PropertiesWindows />}></Route>
+                <Route path="property/:idProperty" element={<PropertyWindow />}></Route>
             </Routes>
         </div>
     )

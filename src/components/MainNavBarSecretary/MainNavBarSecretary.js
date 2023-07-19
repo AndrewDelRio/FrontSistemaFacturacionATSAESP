@@ -56,6 +56,7 @@ const MainNavBar = () => {
             </div>
             <div className="access-container">
                 <p>Último acceso: {sessionStorage.getItem('last_access_date')}</p>
+                <p>Hora del último acceso: {sessionStorage.getItem('last_access_hour')}</p>
                 <p>Dirección IP: {sessionStorage.getItem('last_access_ip_address')}</p>
             </div>
             <div className="user-container">

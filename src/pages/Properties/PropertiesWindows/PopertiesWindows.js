@@ -52,7 +52,7 @@ export function PropertiesWindows() {
             <p className='enrollments-title'><b>Predios</b></p>
             <div className='form-search-enrollment'>
                 <div className='search-enrollment'>
-                    <input type='number' placeholder='Nº de predio' className='input-id-enrollment' value={idProperty} onChange={(e => { setIdProperty(e.target.value) })}></input>
+                    <input type='number' placeholder='Nº de predio' className='input-id-enrollment' value={idProperty} onChange={(e => setIdProperty(e.target.value))} />
                     <button onClick={handleClickSearchProperty} className='button-search-properties'>
                         <img src={searchIcon} alt='' width={40} height={40} fill={defaultIconsColor}></img>
                     </button>
@@ -65,7 +65,7 @@ export function PropertiesWindows() {
             <ModalMessagePerformed
                 img={warningIcon}
                 title={"Error"}
-                message={"Predio no encontrado"}
+                message={"El número predial ingresado no arrojó ningun resultado"}
                 state={modalNotFoundState}
                 accept={() => setModalNotFoundState(!modalNotFoundState)}
             />

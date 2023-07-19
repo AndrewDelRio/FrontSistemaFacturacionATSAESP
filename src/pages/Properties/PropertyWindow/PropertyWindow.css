@@ -1,0 +1,151 @@
+.property {
+    width: 85vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.property-icon {
+    margin-top: 20px;
+}
+
+.property>p {
+    margin: 0;
+    font-size: var(--title-size);
+    font-weight: bold;
+}
+
+.table-property-info {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-spacing: 0;
+    border: solid var(--light-blue) 1px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    font-size: var(--text-form-size);
+}
+
+.table-property-info td {
+    border-left: solid var(--light-blue) 2px;
+    border-bottom: solid var(--light-blue) 2px;
+    padding-inline: 20px;
+    padding-block: 5px;
+    text-align: left;
+}
+
+.table-property-info td:first-child {
+    border-left: none;
+}
+
+.table-property-info tr td:first-child {
+    padding: 3px;
+    background-color: var(--light-blue-opaque-color-80);
+    padding-inline-start: 10px;
+    padding-inline-end: 20px;
+    padding-block: 5px;
+    font-weight: bold;
+}
+
+.table-property-info tr td:last-child {
+    padding: 3px;
+    background-color: var(--light-blue-opaque-color-10);
+    padding-inline: 10px;
+}
+
+.table-property-info tr:first-child td:first-child {
+    border-top-left-radius: 9px;
+}
+
+.table-property-info tr:first-child td:last-child {
+    border-top-right-radius: 9px;
+}
+
+.table-property-info tr:last-child td:first-child {
+    border-bottom-left-radius: 9px;
+}
+
+.table-property-info tr:last-child td:last-child {
+    border-bottom-right-radius: 9px;
+}
+
+.table-enrollments-property {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.table-enrollments-property p {
+    margin: 0;
+    padding: 0;
+    margin: 5px;
+    font-weight: bold;
+    font-size: var(--text-size);
+}
+
+.table-enrollments-property>table {
+    display: block;
+    max-height: 140px;
+    overflow-y: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: solid var(--light-blue) 1px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+.table-enrollments-property th,
+.table-enrollments-property td {
+    border-left: solid var(--light-blue) 2px;
+    border-bottom: solid var(--light-blue) 2px;
+    padding-inline: 20px;
+    padding-block: 5px;
+    text-align: center;
+}
+
+.table-enrollments-property td:first-child,
+.table-enrollments-property th:first-child {
+    border-left: none;
+}
+
+.table-enrollments-property thead {
+    background-color: var(--light-blue-opaque-color-80);
+    border-top: none;
+    color: var(--black);
+}
+
+.table-enrollments-property td {
+    margin: 0;
+    padding: 0;
+    padding-inline: 10px;
+}
+
+.table-enrollments-property tbody tr td {
+    background-color: var(--light-blue-opaque-color-10);
+}
+
+.table-enrollments-property thead th:first-child {
+    border-top-left-radius: 9px;
+}
+
+.table-enrollments-property thead th:last-child {
+    border-top-right-radius: 9px;
+}
+
+.table-enrollments-property tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 9px;
+}
+
+.table-enrollments-property tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 9px;
+}
+
+.show-property-enrollment {
+    background-color: var(--red);
+    border-radius: 10px;
+    margin: 2px;
+    padding-inline: 5px;
+    padding-block: 2px;
+}
