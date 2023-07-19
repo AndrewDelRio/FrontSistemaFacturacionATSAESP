@@ -43,7 +43,7 @@ export function PropertyWindow() {
 
     return (
         <div className='property'>
-            <img src={propertyIcon} height={50} className='property-icon'></img>
+            <img alt='' src={propertyIcon} height={50} className='property-icon'></img>
             <p>Consulta del predio</p>
             <div>
                 <table className='table-property-info'>
