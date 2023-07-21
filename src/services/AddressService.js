@@ -2,6 +2,7 @@ import axios from "axios";
 import { environment } from "../environment/Environment";
 
 let departments = [];
+let places = [];
 
 export const getAddressInformationProperty = () => new Promise((resolve, reject) => {
     const config = {
@@ -21,4 +22,24 @@ export const getAddressInformationProperty = () => new Promise((resolve, reject)
 
 export const getDepartmentsList = () => {
     return departments;
+}
+
+export const getPlacesAssociatedToAPlace = (id_place, type_place) => new Promise((resolve, reject) => {
+    const config = {
+        headers: {
+            token: sessionStorage.getItem('token')
+        }
+    }
+    axios.get(environment.APIHost + '/getPlacesAssociatedToAPlace/' + id_place + '/' + type_place, config).then(resultPlaces => {
+        if (resultPlaces.data.ok) {
+            places = resultPlaces.data.result;
+            resolve(true)
+        }
+    }).catch(err => {
+        reject(err)
+    })
+})
+
+export const getMunicipalitiesList = () => {
+    return places;
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { environment } from "../environment/Environment";
 
-let properiesType = {}
+let propertiesType = {}
 
 export const getPropertyTypes = () => new Promise((resolve, reject) => {
     const config = {
@@ -11,7 +11,7 @@ export const getPropertyTypes = () => new Promise((resolve, reject) => {
     }
     axios.get(environment.APIHost + '/getPropertyTypes', config).then(res => {
         if (res.data.ok) {
-            properiesType = res.data.result
+            propertiesType = res.data.result
             resolve(true)
         }
     }).catch(err => {
@@ -19,6 +19,6 @@ export const getPropertyTypes = () => new Promise((resolve, reject) => {
     })
 })
 
-export const getProperiesType = () => {
-    return properiesType;
+export const getPropertiesType = () => {
+    return propertiesType;
 }

@@ -2,7 +2,7 @@ import axios from "axios";
 import { environment } from "../environment/Environment";
 
 let departments = [];
-let municipalities = [];
+let places = [];
 
 export const getDepartmets = () => new Promise((resolve, reject) => {
     const config = {
@@ -27,7 +27,7 @@ export const getDepartmentsList = () => {
     return departments;
 }
 
-export const getMunicipalities = (id_department) => {
+export const getPlacesAssociatedToAPlace = (id_place) => {
 
     new Promise((resolve, reject) => {
         const config = {
@@ -35,10 +35,10 @@ export const getMunicipalities = (id_department) => {
                 token: sessionStorage.getItem('token')
             }
         }
-        axios.get(environment.APIHost + '/getMunicipalitiesByDpt/' + id_department, config).then(
+        axios.get(environment.APIHost + '/getPlacesAssociatedToAPlace/' + id_place, config).then(
             res => {
                 if (res.data.ok) {
-                    municipalities = res.data.result
+                    places = res.data.result
                     resolve(true)
                 }
             }).catch(
@@ -49,7 +49,7 @@ export const getMunicipalities = (id_department) => {
     })
 }
 
-export const getMunicipalitiesList = (id_department) => {
-    getMunicipalities(id_department);
-    return municipalities;
+export const getPlacesAssociatedToAPlaceList = (id_place) => {
+    getPlacesAssociatedToAPlace(id_place);
+    return places;
 }
