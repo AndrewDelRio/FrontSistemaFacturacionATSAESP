@@ -10,7 +10,7 @@ export const getDepartmets = () => new Promise((resolve, reject) => {
             token: sessionStorage.getItem('token')
         }
     }
-    axios.get(environment.APIHost + '/getDepartments', config).then(
+    axios.get(environment.APIHost + '/getDepartmentsInfo', config).then(
         res => {
             if (res.data.ok) {
                 departments = res.data.result

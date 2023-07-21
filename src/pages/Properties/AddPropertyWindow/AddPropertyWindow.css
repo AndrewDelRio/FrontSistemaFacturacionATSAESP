@@ -1,0 +1,80 @@
+.add-property {
+    width: 85vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2px;
+}
+
+.add-enrollment-icon {
+    margin-top: 5px;
+}
+
+.add-property>p {
+    margin: 0;
+    padding: 0;
+    font-size: var(--title-small-size);
+}
+
+.add-property>p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.add-form-enrollment {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+}
+
+.add-form-enrollment>p {
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+}
+
+.input-info-enrollment {
+    width: 220px;
+    border: gray solid 2px;
+    border-radius: 10px;
+    font-size: var(--text-form-size);
+    padding-inline: 10px;
+    padding-block: 5px;
+}
+
+.property-dates-container {
+    border: var(--light-blue) solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 5px;
+}
+
+.property-dates-container>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size);
+}
+
+.property-economic-dates-container {
+    border: var(--light-blue) solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    row-gap: 0px;
+    column-gap: 0px;
+    padding: 5px;
+}
+
+.property-economic-dates-container>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size);
+}

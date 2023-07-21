@@ -8,7 +8,10 @@ import addPropertyIcon from "../../../assets/images/addProperty.svg"
 import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
 import { getPropertyByID } from "../../../services/PropertiesService"
 import { getEconomicDestinationProperty } from "../../../services/EconomicDestinationService"
-import { getAddressInformationProperty } from "../../../services/AddressService"
+import { getAddressInformationProperties } from "../../../services/AddressService"
+import { getPropertyTypes } from "../../../services/PropertiesTypeService"
+import { getOwnerShipConditions } from "../../../services/OwnershipConditionService"
+import { getStratums } from "../../../services/StratumService"
 import './PropertiesWindows.css'
 const defaultIconsColor = "#FFFFFF"
 
@@ -36,9 +39,23 @@ export function PropertiesWindows() {
     const handleClickAddProperty = () => {
         getEconomicDestinationProperty().then(res => {
             if (res) {
-                getAddressInformationProperty().then(resAddress => {
+                getAddressInformationProperties().then(resAddress => {
                     if (resAddress) {
-                        navigate('/secretary/register-property')
+                        getPropertyTypes().then(resPropertiesTypes => {
+                            if (resPropertiesTypes) {
+                                getOwnerShipConditions().then(resOwnershipConditions => {
+                                    if (resOwnershipConditions) {
+                                        getStratums().then(resStratums => {
+                                            if (resStratums) {
+                                                navigate('/secretary/register-property')
+                                            }
+                                        })
+
+                                    }
+                                })
+
+                            }
+                        })
                     }
                 }).catch(err => {
                     console.log(err);

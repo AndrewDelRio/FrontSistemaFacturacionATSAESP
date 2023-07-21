@@ -1,7 +1,7 @@
 import axios from "axios";
 import { environment } from "../environment/Environment";
 
-let propertiesType = {}
+let propertiesType = []
 
 export const getPropertyTypes = () => new Promise((resolve, reject) => {
     const config = {
@@ -19,6 +19,6 @@ export const getPropertyTypes = () => new Promise((resolve, reject) => {
     })
 })
 
-export const getPropertiesType = () => {
+export const getPropertiesTypeList = () => {
     return propertiesType;
 }

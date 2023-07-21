@@ -1,7 +1,7 @@
 import axios from "axios";
 import { environment } from "../environment/Environment";
 
-let ownershipConditionList = {}
+let ownershipConditionList = []
 
 export const getOwnerShipConditions = () => new Promise((resolve, reject) => {
     const config = {

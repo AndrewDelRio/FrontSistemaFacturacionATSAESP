@@ -6,8 +6,9 @@ import SubscribersWindow from "../Subscribers/SubscribersWindow/SubscribersWindo
 import { SubscriberWindow } from "../Subscribers/SubscriberWindow/SubscriberWindow";
 import { AddSubscriberWindow } from "../Subscribers/AddSubscriberWindow/AddSubscriberWindow";
 import { EditSubscriberWindow } from "../Subscribers/EditSubscriberWindow/EditSubscriberWindow";
-import { PropertiesWindows } from "../Properties/PropertiesWindows/PopertiesWindows";
+import { PropertiesWindows } from "../Properties/PropertiesWindows/PropertiesWindows";
 import { PropertyWindow } from "../Properties/PropertyWindow/PropertyWindow";
+import { AddPropertyWindow } from "../Properties/AddPropertyWindow/AddPropertyWindow"
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -22,6 +23,7 @@ const MainWindowSecretary = () => {
                 <Route path="edit-subscriber/:id_subscriber" element={<EditSubscriberWindow />} />
                 <Route path="properties" element={<PropertiesWindows />}></Route>
                 <Route path="property/:idProperty" element={<PropertyWindow />}></Route>
+                <Route path="register-property" element={<AddPropertyWindow />}></Route>
             </Routes>
         </div>
     )

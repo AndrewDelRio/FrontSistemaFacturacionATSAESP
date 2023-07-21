@@ -4,7 +4,7 @@ import { environment } from "../environment/Environment";
 let departments = [];
 let places = [];
 
-export const getAddressInformationProperty = () => new Promise((resolve, reject) => {
+export const getAddressInformationProperties = () => new Promise((resolve, reject) => {
     const config = {
         headers: {
             token: sessionStorage.getItem('token')
@@ -20,7 +20,7 @@ export const getAddressInformationProperty = () => new Promise((resolve, reject)
     })
 })
 
-export const getDepartmentsList = () => {
+export const getDepartmentsLists = () => {
     return departments;
 }
 
