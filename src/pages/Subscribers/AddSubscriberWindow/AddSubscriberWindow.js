@@ -145,7 +145,7 @@ export function AddSubscriberWindow() {
                             value={documentTypeState}
                             onChange={(e) => setDocumentTypeState(e.target.value)}
                         >
-                            {documentTypes.map(documentType => {
+                            {documentTypes === null ? '' : documentTypes.map(documentType => {
                                 return (
                                     <option key={documentType.id_document_type}
                                         value={documentType.id_document_type}>
