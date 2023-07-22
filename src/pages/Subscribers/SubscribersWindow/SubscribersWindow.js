@@ -57,7 +57,11 @@ const SubscribersWindow = () => {
             console.log(err)
         })
     }
-
+    const onEnterKeySearchSubscriber = (e) => {
+        if (e.keyCode == 13) {
+            handleClickSearchSubscriber(e)
+        }
+    }
 
     return (
         <div className="subscribers">
@@ -65,7 +69,7 @@ const SubscribersWindow = () => {
             <p className="subscribers-title"><b>Suscriptores</b></p>
             <div className="form-search-subscriber">
                 <div className="search-subscriber">
-                    <input type="number" placeholder="Nº del documento del suscriptor" className="input-id-subscriber" value={idSubscriber} onChange={(e) => setIdSubscriber(e.target.value)} />
+                    <input type="number" placeholder="Nº del documento del suscriptor" className="input-id-subscriber" value={idSubscriber} onChange={(e) => setIdSubscriber(e.target.value)} onKeyDown={onEnterKeySearchSubscriber} />
                     <button onClick={handleClickSearchSubscriber} className="button-search-subscribers">
                         <img src={searchIcon} alt="" width={40} height={40} fill={defaultIconsColor} />
                     </button>
@@ -77,7 +81,8 @@ const SubscribersWindow = () => {
             </div>
             <ModalMessagePerformed
                 img={warningIcon}
-                title={"Suscriptor no encontrado"}
+                title={"Error"}
+                message={"El número de documento ingresado no arrojó ningun resultado"}
                 state={modalNotFoundState}
                 accept={() => setModalNotFoundState(!modalNotFoundState)}
             />

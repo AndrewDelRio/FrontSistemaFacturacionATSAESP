@@ -36,6 +36,12 @@ export function PropertiesWindows() {
         }
     }
 
+    const onEnterKeySearchProperty = (e) => {
+        if (e.keyCode == 13) {
+            handleClickSearchProperty(e)
+        }
+    }
+
     const handleClickAddProperty = () => {
         getEconomicDestinationProperty().then(res => {
             if (res) {
@@ -69,7 +75,7 @@ export function PropertiesWindows() {
             <p className='enrollments-title'><b>Predios</b></p>
             <div className='form-search-enrollment'>
                 <div className='search-enrollment'>
-                    <input type='number' placeholder='Nº de predio' className='input-id-enrollment' value={idProperty} onChange={(e => setIdProperty(e.target.value))} />
+                    <input type='number' placeholder='Nº de predio' className='input-id-enrollment' value={idProperty} onChange={(e => setIdProperty(e.target.value))} onKeyDown={(e) => onEnterKeySearchProperty(e)} />
                     <button onClick={handleClickSearchProperty} className='button-search-properties'>
                         <img src={searchIcon} alt='' width={40} height={40} fill={defaultIconsColor}></img>
                     </button>
