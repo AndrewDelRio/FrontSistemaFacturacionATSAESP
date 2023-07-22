@@ -58,7 +58,7 @@ const SubscribersWindow = () => {
         })
     }
     const onEnterKeySearchSubscriber = (e) => {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             handleClickSearchSubscriber(e)
         }
     }

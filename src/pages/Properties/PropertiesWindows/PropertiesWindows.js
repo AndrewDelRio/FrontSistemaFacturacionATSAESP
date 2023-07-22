@@ -8,7 +8,7 @@ import addPropertyIcon from "../../../assets/images/addProperty.svg"
 import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
 import { getPropertyByID } from "../../../services/PropertiesService"
 import { getEconomicDestinationProperty } from "../../../services/EconomicDestinationService"
-import { getAddressInformationProperties } from "../../../services/AddressService"
+import { getAddressInformationProperties } from "../../../services/PlacesService"
 import { getPropertyTypes } from "../../../services/PropertiesTypeService"
 import { getOwnerShipConditions } from "../../../services/OwnershipConditionService"
 import { getStratums } from "../../../services/StratumService"
@@ -37,7 +37,7 @@ export function PropertiesWindows() {
     }
 
     const onEnterKeySearchProperty = (e) => {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             handleClickSearchProperty(e)
         }
     }

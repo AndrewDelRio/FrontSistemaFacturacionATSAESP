@@ -5,7 +5,7 @@ import addPropertyIcon from "../../../assets/images/addProperty.svg"
 import warningIcon from "../../../assets/images/warning.svg"
 import { ModalActionPerformed } from "../../../components/ModalActionPerformed/ModalActionPerformed"
 import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
-import { getDepartmentsLists } from '../../../services/AddressService'
+import { getDepartmentsLists } from '../../../services/PlacesService'
 import { getEconomicDestinationList } from "../../../services/EconomicDestinationService"
 import { getPropertiesTypeList } from "../../../services/PropertiesTypeService"
 import { addProperty } from '../../../services/PropertiesService'
