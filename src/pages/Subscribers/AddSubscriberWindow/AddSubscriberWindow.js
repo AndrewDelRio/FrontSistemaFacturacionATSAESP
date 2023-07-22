@@ -143,6 +143,7 @@ export function AddSubscriberWindow() {
                         <p>Tipo de Documento *</p>
                         <select className="input-info-subscriber"
                             value={documentTypeState}
+                            placeholder="Tipo de documento"
                             onChange={(e) => setDocumentTypeState(e.target.value)}
                         >
                             {documentTypes === null ? '' : documentTypes.map(documentType => {
@@ -158,7 +159,7 @@ export function AddSubscriberWindow() {
 
                     <div>
                         <p>Número de documento *</p>
-                        <input className="input-info-subscriber" type="number" value={documentNumberState} onChange={(e) => setDocumentNumberState(e.target.value)} />
+                        <input className="input-info-subscriber" maxLength={10} size={10} placeholder="0000000000" type="number" value={documentNumberState} onChange={(e) => setDocumentNumberState(e.target.value)} />
                     </div>
 
                     <div id="expedition-date" >
@@ -192,6 +193,7 @@ export function AddSubscriberWindow() {
                                 <select className="input-expedition-place"
                                     value={municipalityState}
                                     onChange={(e) => setMunicipalityState(e.target.value)}
+                                    onClick={(e) => setMunicipalityState(e.target.value)}
                                 >
                                     {
                                         departmentState > -1 &&
@@ -210,11 +212,11 @@ export function AddSubscriberWindow() {
                 <div className="personal-data-containers">
                     <div>
                         <p>Apellido(s) *</p>
-                        <input className="input-info-subscriber" type="text" value={lastnamesState} onChange={(e) => setLastnamesState(e.target.value)}></input>
+                        <input className="input-info-subscriber" maxLength={45} size={45} placeholder="Apellido(s)" type="text" value={lastnamesState} onChange={(e) => setLastnamesState(e.target.value)}></input>
                     </div>
                     <div >
                         <p>Nombre(s) *</p>
-                        <input className="input-info-subscriber" type="text" value={nameState} onChange={(e) => setNamesState(e.target.value)}></input>
+                        <input className="input-info-subscriber" maxLength={45} size={45} placeholder="Nombre(s)" type="text" value={nameState} onChange={(e) => setNamesState(e.target.value)}></input>
                     </div>
                     <div>
                         <p>Genéro *</p>
@@ -239,15 +241,15 @@ export function AddSubscriberWindow() {
                 <div className="contact-dates-container">
                     <div>
                         <p>Dirección *</p>
-                        <input className="input-info-subscriber" type="text" value={addressState} onChange={(e) => setAddressState(e.target.value)}></input>
+                        <input className="input-info-subscriber" maxLength={45} size={45} placeholder="Calle 3 # 1-11" type="text" value={addressState} onChange={(e) => setAddressState(e.target.value)}></input>
                     </div>
                     <div>
                         <p>Correo electrónico *</p>
-                        <input className="input-info-subscriber" type="text" value={emailState} onChange={(e) => setEmailState(e.target.value)}></input>
+                        <input className="input-info-subscriber" maxLength={100} size={100} placeholder="usuario@correo.com" type="email" value={emailState} onChange={(e) => setEmailState(e.target.value)}></input>
                     </div>
                     <div>
                         <p>Teléfono *</p>
-                        <input className="input-info-subscriber" type="number" value={phoneState} onChange={(e) => setPhoneState(e.target.value)}></input>
+                        <input className="input-info-subscriber" size={10} maxLength={10} placeholder="300 000 0000" type="number" value={phoneState} onChange={(e) => setPhoneState(e.target.value)}></input>
                     </div>
                 </div>
                 <div className="control-button">
