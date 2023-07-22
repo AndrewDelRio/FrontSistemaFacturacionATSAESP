@@ -7,7 +7,7 @@
     row-gap: 2px;
 }
 
-.add-enrollment-icon {
+.add-property-icon {
     margin-top: 5px;
 }
 
@@ -22,26 +22,23 @@
     font-weight: bold;
 }
 
-.add-form-enrollment {
+.add-form-property {
     width: 90%;
     display: grid;
     grid-template-columns: repeat(1, auto);
     row-gap: 5px;
     column-gap: 5px;
     padding: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
 }
 
-.add-form-enrollment>p {
+.add-form-property>p {
     margin: 0;
     font-weight: bold;
     text-align: left;
 }
 
-.input-info-enrollment {
-    width: 220px;
+.input-info-property {
+    width: 180px;
     border: gray solid 2px;
     border-radius: 10px;
     font-size: var(--text-form-size);
@@ -59,6 +56,10 @@
     padding: 5px;
 }
 
+#predial-code {
+    color: var(--light-blue-opaque-color-80);
+}
+
 .property-dates-container>div>p {
     margin: 0;
     font-size: var(--nav-bar-text-size);
@@ -69,12 +70,65 @@
     border-radius: 10px;
     display: grid;
     grid-template-columns: repeat(4, auto);
-    row-gap: 0px;
-    column-gap: 0px;
+    row-gap: 5px;
+    column-gap: 5px;
     padding: 5px;
 }
 
 .property-economic-dates-container>div>p {
     margin: 0;
     font-size: var(--nav-bar-text-size);
+}
+
+.input-horizontal-property {
+    width: 100px;
+    border: gray solid 2px;
+    border-radius: 10px;
+    font-size: var(--nav-bar-text-size-info-system);
+    padding-inline: 10px;
+    padding-block: 5px;
+}
+
+.property-address-dates-container {
+    border: var(--light-blue) solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 5px;
+}
+
+.property-address-dates-container>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size);
+}
+
+.horizontal-property-container {
+    margin-right: -210px;
+    margin-left: 40px;
+}
+
+.horizontal-property-container>div {
+    position: relative;
+    width: auto;
+    border: gray solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    row-gap: 2px;
+    column-gap: 2px;
+    padding: 2px;
+}
+
+.horizontal-property-container>div>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size-info-system);
+    text-align: center;
+}
+
+.control-button {
+    width: 100%;
+    justify-content: center;
+    justify-items: center;
 }
