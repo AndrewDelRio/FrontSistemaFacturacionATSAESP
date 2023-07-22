@@ -5,7 +5,7 @@ import addPropertyIcon from "../../../assets/images/addProperty.svg"
 import warningIcon from "../../../assets/images/warning.svg"
 import { ModalActionPerformed } from "../../../components/ModalActionPerformed/ModalActionPerformed"
 import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
-import { getDepartmentsLists } from '../../../services/PlacesService'
+import { getDepartmentsLists, getPlacesAssociatedToAPlace, getMunicipalitiesList } from '../../../services/PlacesService'
 import { getEconomicDestinationList } from "../../../services/EconomicDestinationService"
 import { getPropertiesTypeList } from "../../../services/PropertiesTypeService"
 import { addProperty } from '../../../services/PropertiesService'
@@ -75,6 +75,10 @@ export function AddPropertyWindow() {
 
     let predialCodeComplete = propertyDepartmentState + propertyMunicipalitystate + propertyTypeState + propertySectorState + propertyComuneState + propertyNeighboorhoodState + propertyBlockOrSidewalkState + propertyNumberState.padStart(4, '0') + propertyOwnershipConditionState + propertyHorizontalBuildingNumberState + propertyHorizontalFloorNumberState + propertyHorizontalUnityNumberState
 
+    /**
+     * Para agregal el predio
+     * @param {*} e 
+     */
     const handleClickAddProperty = (e) => {
         e.preventDefault();
         if (propertyNumberState === "" ||
@@ -89,9 +93,6 @@ export function AddPropertyWindow() {
             propertyStratumState === "" ||
             propertyDepartmentState === "" ||
             propertyMunicipalitystate === "" ||
-            propertySectorState === "" ||
-            propertyComuneState === "" ||
-            propertyNeighboorhoodState === "" ||
             propertyBlockOrSidewalkState === ""
         ) {
             changeModalWarningState(!modalWarningState)
@@ -152,19 +153,28 @@ export function AddPropertyWindow() {
         }
     }
 
-    const handleClickProperties = () => {
+    /**
+     * Para confirmar -> volver de la pantalla de agregar propiedad
+     */
+    const handleClickBackProperties = () => {
         navigate('/secretary/properties')
     }
 
-    const handleClickAddProperties = (modalState) => {
-        changeModalWarningState(!modalState)
+    /**
+     * Para mostrar el modal de volver a la pagina de predios
+     */
+    const handleClickBackButton = () => {
+        changeModalBackToPage(!modalStateBack);
     }
 
-    const handleClickAddSubscribersError = () => {
+    /**
+     * Para mostrar que un predio ya existe con esos mismos datos
+     */
+    const handleClickAddPropertyError = () => {
         changeModalErrorState(!modalErrorState)
     }
 
-    const handleClickAddSubscribersExist = () => {
+    const handleClickAddPropertyExist = () => {
         changeModalExistState(!modalExistState)
     }
     return (
@@ -202,8 +212,8 @@ export function AddPropertyWindow() {
                 <p>Datos económicos del predio</p>
                 <div className='property-economic-dates-container'>
                     <div>
-                        <p>Destino económico</p>
-                        <select className='input-info-property' value={propertyEconomicDestinationState} onChange={(e) => setPropertyEconomicDestinationState(e.target.value)}>{
+                        <p>Destino económico *</p>
+                        <select className='input-info-property' value={propertyEconomicDestinationState} onChange={(e) => setPropertyEconomicDestinationState(e.target.value)} onClick={(e) => setPropertyEconomicDestinationState(e.target.value)} >{
                             economicDestinationList === null ? '' :
                                 economicDestinationList.map(economicDestination => {
                                     return (
@@ -216,7 +226,7 @@ export function AddPropertyWindow() {
                     </div>
                     <div>
                         <p>Tipo de predio *</p>
-                        <select className='input-info-property' value={propertyTypeState} onChange={(e) => setPropertyTypeState(e.target.value)}>{
+                        <select className='input-info-property' value={propertyTypeState} onChange={(e) => setPropertyTypeState(e.target.value)} onClick={(e) => setPropertyTypeState(e.target.value)}>{
                             propertyTypeList === null ? '' :
                                 propertyTypeList.map(propertyType => {
                                     return (
@@ -228,7 +238,7 @@ export function AddPropertyWindow() {
                     </div>
                     <div>
                         <p>Condición de propiedad *</p>
-                        <select className='input-info-property' value={propertyOwnershipConditionState} onChange={(e) => setPropertyOwnershipConditionState(e.target.value)}>{
+                        <select className='input-info-property' value={propertyOwnershipConditionState} onChange={(e) => setPropertyOwnershipConditionState(e.target.value)} onClick={(e) => setPropertyOwnershipConditionState(e.target.value)}>{
                             ownershipConditionList === null ? '' :
                                 ownershipConditionList.map(ownership => {
                                     return (
@@ -241,7 +251,7 @@ export function AddPropertyWindow() {
 
                     <div>
                         <p>Estrato *</p>
-                        <select className='input-info-property' value={propertyStratumState} onChange={(e) => setPropertyStratumState(e.target.value)}>{
+                        <select className='input-info-property' value={propertyStratumState} onChange={(e) => setPropertyStratumState(e.target.value)} onClick={(e) => setPropertyStratumState(e.target.value)}>{
                             stratumsList === null ? '' :
                                 stratumsList.map(stratum => {
                                     return (
@@ -269,36 +279,36 @@ export function AddPropertyWindow() {
 
                     <div>
                         <p>Municipio *</p>
-                        <select className='input-info-property' value={propertyMunicipalitystate} onChange={(e) => setPropertyMunicipalitystate(e.target.value)}>
+                        <select className='input-info-property' value={propertyMunicipalitystate} onChange={(e) => setPropertyMunicipalitystate(e.target.value)} onClick={(e) => setPropertyMunicipalitystate(e.target.value)}>
                             <option>Seleccione una opción</option>
                             <option key={816} value={816}>Togui</option>
                         </select>
                     </div>
 
                     <div>
-                        <p>Sector *</p>
-                        <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)}>
+                        <p>Sector</p>
+                        <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)} onClick={(e) => setPropertySectorState(e.target.value)}>
                             <option>Seleccione una opción</option>
                         </select>
                     </div>
 
                     <div>
-                        <p>Comuna *</p>
-                        <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)}>
+                        <p>Comuna</p>
+                        <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)} onClick={(e) => setPropertySectorState(e.target.value)}>
                             <option>Seleccione una opción</option>
                         </select>
                     </div>
 
                     <div>
                         <p>Barrio</p>
-                        <select className='input-info-property' value={propertyNeighboorhoodState} onChange={(e) => setPropertyNeighboorhoodState(e.target.value)}>
+                        <select className='input-info-property' value={propertyNeighboorhoodState} onChange={(e) => setPropertyNeighboorhoodState(e.target.value)} onClick={(e) => setPropertyNeighboorhoodState(e.target.value)}>
                             <option>Seleccione una opción</option>
                         </select>
                     </div>
 
                     <div>
                         <p>Manzana/Vereda *</p>
-                        <select className='input-info-property' value={propertyBlockOrSidewalkState} onChange={(e) => setPropertyBlockOrSideWalkState(e.target.value)}>
+                        <select className='input-info-property' value={propertyBlockOrSidewalkState} onChange={(e) => setPropertyBlockOrSideWalkState(e.target.value)} onClick={(e) => setPropertyBlockOrSideWalkState(e.target.value)}>
                             <option>Seleccione una opción</option>
                             <option key={'0013'} value={'0013'}>Manzana 13</option>
                         </select>
@@ -325,12 +335,51 @@ export function AddPropertyWindow() {
                     <ControlButton
                         titleAceptButton="Registrar"
                         titleBackButton="Volver"
-                        acceptFunction={handleClickAddProperties}
+                        acceptFunction={handleClickAddProperty}
                         backFunction={() => { changeModalBackToPage(!modalStateBack) }}
                     />
                 </div>
             </div>
+            <ModalMessagePerformed
+                img={addPropertyIcon}
+                title="Aviso"
+                message="Predio registrado exitosamente en el sistema"
+                state={modalState}
+                accept={handleClickBackProperties}
+            />
 
+            <ModalMessagePerformed
+                img={warningIcon}
+                title="Aviso"
+                message="Algunos datos son obligatorios"
+                state={modalWarningState}
+                accept={handleClickAddProperty}
+            />
+
+            <ModalMessagePerformed
+                img={warningIcon}
+                title="Error"
+                message="El predio ya se encuentra registrado!"
+                state={modalExistState}
+                accept={handleClickAddPropertyExist}
+            />
+
+            <ModalMessagePerformed
+                img={warningIcon}
+                title="Error"
+                message="Error al agregar el predio"
+                state={modalErrorState}
+                accept={handleClickAddPropertyError}
+            />
+
+            <ModalActionPerformed
+                img={warningIcon}
+                title={"¿Deseas salir?"}
+                message={"¡¡Se perderá toda la información sin guardar!!"}
+                state={modalStateBack}
+                accept={handleClickBackProperties}
+                cancel={handleClickBackButton}
+            />
         </div >
     )
 }

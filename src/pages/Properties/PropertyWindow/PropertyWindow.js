@@ -10,7 +10,7 @@ import ControlButton from '../../../components/ControlButton/ControlButton'
 import './PropertyWindow.css'
 import { useState } from 'react'
 
-let property = {};
+let property = [];
 
 export function PropertyWindow() {
     property = getProperty()
@@ -88,7 +88,7 @@ export function PropertyWindow() {
                         </tr>
                     </thead>
                     <tbody>
-                        {property.listEnrollments ? property.listEnrollments.map((enrollment) => {
+                        {property.listEnrollments.length > 0 ? property.listEnrollments.map((enrollment) => {
                             return (
                                 <tr key={enrollment.id_enrollment}>
                                     <td>{enrollment.id_enrollment}</td>
