@@ -2,7 +2,11 @@ import axios from "axios";
 import { environment } from "../environment/Environment";
 
 let departments = [];
-let places = [];
+let municipalities = [];
+let sectors = [];
+let comunes = [];
+let neighboorhods = [];
+let blocksOrSideWalks = [];
 
 /**
  * Obtain the list of deparmets with yours respectives cities
@@ -65,15 +69,15 @@ export const getDepartmentsLists = () => {
  * @param {*} type_place 
  * @returns 
  */
-export const getPlacesAssociatedToAPlace = (id_place, type_place) => new Promise((resolve, reject) => {
+export const getMunicipalitiesOfAPlace = (id_place) => new Promise((resolve, reject) => {
     const config = {
         headers: {
             token: sessionStorage.getItem('token')
         }
     }
-    axios.get(environment.APIHost + '/getPlacesAssociatedToAPlace/' + id_place + '/' + type_place, config).then(resultPlaces => {
+    axios.get(environment.APIHost + '/getPlacesAssociatedToAPlace/' + id_place + '/' + 'MNP', config).then(resultPlaces => {
         if (resultPlaces.data.ok) {
-            places = resultPlaces.data.result;
+            municipalities = resultPlaces.data.result;
             resolve(true)
         }
     }).catch(err => {
@@ -86,5 +90,5 @@ export const getPlacesAssociatedToAPlace = (id_place, type_place) => new Promise
  * @returns Export the list of places associated to the search
  */
 export const getMunicipalitiesList = () => {
-    return places;
+    return municipalities;
 }

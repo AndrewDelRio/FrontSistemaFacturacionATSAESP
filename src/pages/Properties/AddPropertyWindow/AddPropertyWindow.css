@@ -44,6 +44,7 @@
     font-size: var(--text-form-size);
     padding-inline: 10px;
     padding-block: 5px;
+    text-align: center;
 }
 
 .property-dates-container {

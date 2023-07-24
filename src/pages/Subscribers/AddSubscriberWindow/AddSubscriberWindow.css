@@ -50,6 +50,7 @@ etiqueta de los titulos del formulario agregar
     font-size: var(--text-form-size);
     padding-inline: 10px;
     padding-block: 5px;
+    text-align: center;
 }
 
 .input-expedition-place {
