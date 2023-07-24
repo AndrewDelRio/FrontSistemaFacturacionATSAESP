@@ -16,6 +16,7 @@ import './AddPropertyWindow.css'
 
 let economicDestinationList = [];
 let departmentsList = [];
+let sectorsList = [];
 let comunesList = [];
 let neighboorhoodList = [];
 let blockOrSideWalkList = [];
@@ -33,7 +34,6 @@ export function AddPropertyWindow() {
     stratumsList = getStratumsList()
 
     const [municipalityList, setMunicpalityList] = useState([])
-    const [sectorsList, setSectorsList] = useState([])
 
 
     const navigate = useNavigate()
@@ -182,21 +182,11 @@ export function AddPropertyWindow() {
     useEffect(() => {
         if (propertyDepartmentState !== '00') {
             getPlacesAssociatedToAPlace(propertyDepartmentState, 'MNP');
-            setMunicpalityList(getMunicipalitiesList());
+            setMunicpalityList(getMunicipalitiesList);
         }
-    }, [propertyDepartmentState, municipalityList, getPlacesAssociatedToAPlace, getMunicipalitiesList]
+    }, [propertyDepartmentState, getPlacesAssociatedToAPlace, municipalityList, getMunicipalitiesList()]
     )
 
-    /** 
-    useEffect(() => {
-        if (propertyMunicipalitystate !== '000') {
-            getPlacesAssociatedToAPlace(propertyMunicipalitystate, 'SEC');
-            setSectorsList(getMunicipalitiesList);
-        }
-    }, [propertyMunicipalitystate, sectorsList, getPlacesAssociatedToAPlace]
-
-    )
-    */
     const onchangeDepartmentState = (e) => {
         setPropertyDepartmentState(e.target.value);
     }
