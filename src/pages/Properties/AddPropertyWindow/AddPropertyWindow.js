@@ -180,15 +180,22 @@ export function AddPropertyWindow() {
     }
 
     useEffect(() => {
-        if (propertyDepartmentState !== '00') {
-            getPlacesAssociatedToAPlace(propertyDepartmentState, 'MNP');
-            setMunicpalityList(getMunicipalitiesList);
-        }
-    }, [propertyDepartmentState, getPlacesAssociatedToAPlace, municipalityList, getMunicipalitiesList()]
+        setMunicpalityList(getMunicipalitiesList);
+    }, [getMunicipalitiesList()]
     )
 
     const onchangeDepartmentState = (e) => {
         setPropertyDepartmentState(e.target.value);
+        if (propertyDepartmentState !== '00') {
+            getPlacesAssociatedToAPlace(propertyDepartmentState, 'MNP');
+        }
+    }
+
+    const onChnageMunicipality = (e) => {
+        setPropertyMunicipalitystate(e.target.value);
+        if (propertyMunicipalitystate !== '000') {
+            getPlacesAssociatedToAPlace(propertyMunicipalitystate, 'SEC')
+        }
     }
 
     return (
@@ -306,12 +313,15 @@ export function AddPropertyWindow() {
                     <div>
                         <p>Sector</p>
                         <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)} onClick={(e) => setPropertySectorState(e.target.value)}>{
-                            sectorsList !== null ? (
-                                sectorsList.map(sector => {
-                                    <option key={sector.id_place} value={sector.id_place}>{sector.name_place}</option>
-                                })
-                            ) : <option key={'00'} value={'00'}>{''}</option>
+                            sectorsList !== null ?
+                                (
+                                    sectorsList.map(sector => {
+                                        return (
+                                            <option key={sector.id_place} value={sector.id_place}>{sector.name_place}</option>)
+                                    })
+                                ) : <option key={'00'} value={'00'}>{'-'}</option>
                         }
+
                         </select>
                     </div>
 
