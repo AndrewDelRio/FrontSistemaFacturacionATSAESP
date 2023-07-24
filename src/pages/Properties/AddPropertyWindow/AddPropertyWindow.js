@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import addPropertyIcon from "../../../assets/images/addProperty.svg"
 import warningIcon from "../../../assets/images/warning.svg"
@@ -16,8 +16,6 @@ import './AddPropertyWindow.css'
 
 let economicDestinationList = [];
 let departmentsList = [];
-let municipalityList = [];
-let sectorsList = [];
 let comunesList = [];
 let neighboorhoodList = [];
 let blockOrSideWalkList = [];
@@ -33,6 +31,9 @@ export function AddPropertyWindow() {
     propertyTypeList = getPropertiesTypeList()
     ownershipConditionList = getOwnerShipConditionsList()
     stratumsList = getStratumsList()
+
+    const [municipalityList, setMunicpalityList] = useState([])
+    const [sectorsList, setSectorsList] = useState([])
 
 
     const navigate = useNavigate()
@@ -177,6 +178,29 @@ export function AddPropertyWindow() {
     const handleClickAddPropertyExist = () => {
         changeModalExistState(!modalExistState)
     }
+
+    useEffect(() => {
+        if (propertyDepartmentState !== '00') {
+            getPlacesAssociatedToAPlace(propertyDepartmentState, 'MNP');
+            setMunicpalityList(getMunicipalitiesList());
+        }
+    }, [propertyDepartmentState, municipalityList, getPlacesAssociatedToAPlace, getMunicipalitiesList]
+    )
+
+    /** 
+    useEffect(() => {
+        if (propertyMunicipalitystate !== '000') {
+            getPlacesAssociatedToAPlace(propertyMunicipalitystate, 'SEC');
+            setSectorsList(getMunicipalitiesList);
+        }
+    }, [propertyMunicipalitystate, sectorsList, getPlacesAssociatedToAPlace]
+
+    )
+    */
+    const onchangeDepartmentState = (e) => {
+        setPropertyDepartmentState(e.target.value);
+    }
+
     return (
         <div className='add-property'>
             <img src={addPropertyIcon} alt='' height={50} className='add-property-icon' />
@@ -267,7 +291,7 @@ export function AddPropertyWindow() {
                 <div className='property-address-dates-container'>
                     <div>
                         <p>Departamento *</p>
-                        <select className='input-info-property' value={propertyDepartmentState} onChange={(e) => setPropertyDepartmentState(e.target.value)} onClick={(e) => setPropertyDepartmentState(e.target.value)}>{
+                        <select className='input-info-property' value={propertyDepartmentState} onChange={onchangeDepartmentState} onClick={onchangeDepartmentState}>{
                             departmentsList.map(department => {
                                 return (
                                     <option key={department.id_place} value={department.id_place}>{department.name_place}</option>
@@ -276,19 +300,28 @@ export function AddPropertyWindow() {
                         }
                         </select>
                     </div>
-
                     <div>
                         <p>Municipio *</p>
                         <select className='input-info-property' value={propertyMunicipalitystate} onChange={(e) => setPropertyMunicipalitystate(e.target.value)} onClick={(e) => setPropertyMunicipalitystate(e.target.value)}>
-                            <option>Seleccione una opción</option>
-                            <option key={816} value={816}>Togui</option>
+                            {
+                                municipalityList.map(municipality => (
+                                    <option key={municipality.id_place} value={municipality.id_place}>
+                                        {municipality.name_place}
+                                    </option>
+                                ))
+                            }
                         </select>
                     </div>
 
                     <div>
                         <p>Sector</p>
-                        <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)} onClick={(e) => setPropertySectorState(e.target.value)}>
-                            <option>Seleccione una opción</option>
+                        <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)} onClick={(e) => setPropertySectorState(e.target.value)}>{
+                            sectorsList !== null ? (
+                                sectorsList.map(sector => {
+                                    <option key={sector.id_place} value={sector.id_place}>{sector.name_place}</option>
+                                })
+                            ) : <option key={'00'} value={'00'}>{''}</option>
+                        }
                         </select>
                     </div>
 
