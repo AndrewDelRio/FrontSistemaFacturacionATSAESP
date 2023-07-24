@@ -5,7 +5,7 @@ import addPropertyIcon from "../../../assets/images/addProperty.svg"
 import warningIcon from "../../../assets/images/warning.svg"
 import { ModalActionPerformed } from "../../../components/ModalActionPerformed/ModalActionPerformed"
 import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
-import { getDepartmentsLists, getMunicipalitiesOfAPlace, getMunicipalitiesList } from '../../../services/PlacesService'
+import { getDepartmentsLists, getMunicipalitiesOfAPlace, getMunicipalitiesList, getSectorsOfAPlace, getSectorsList, getComunesOfAPlace, getComunesList, getNeighboorhodsList, getNeighboorhodsOfAPlace, getBlocksOrSidewalkOfAPlace, getBlocksOrSideWalksList } from '../../../services/PlacesService'
 import { getEconomicDestinationList } from "../../../services/EconomicDestinationService"
 import { getPropertiesTypeList } from "../../../services/PropertiesTypeService"
 import { addProperty } from '../../../services/PropertiesService'
@@ -16,10 +16,6 @@ import './AddPropertyWindow.css'
 
 let economicDestinationList = [];
 let departmentsList = [];
-let sectorsList = [];
-let comunesList = [];
-let neighboorhoodList = [];
-let blockOrSideWalkList = [];
 let propertyTypeList = [];
 let ownershipConditionList = [];
 let stratumsList = [];
@@ -34,7 +30,10 @@ export function AddPropertyWindow() {
     stratumsList = getStratumsList()
 
     const [municipalityList, setMunicpalityList] = useState([])
-
+    const [sectorsList, setSectorsList] = useState([])
+    const [comunesList, setComunesList] = useState([])
+    const [neighboorhodsList, setneighboorhodsList] = useState([])
+    const [blocksOrSideWalkList, setBlocksOrSideWalkList] = useState([])
 
     const navigate = useNavigate()
     const [modalState, changeModalState] = useState(false)
@@ -180,8 +179,17 @@ export function AddPropertyWindow() {
     }
 
     useEffect(() => {
-        setMunicpalityList(getMunicipalitiesList);
-    }, [getMunicipalitiesList()]
+        const interval = setInterval(() => {
+            setMunicpalityList(getMunicipalitiesList);
+            setSectorsList(getSectorsList);
+            setComunesList(getComunesList);
+            setneighboorhodsList(getNeighboorhodsList);
+            setBlocksOrSideWalkList(getBlocksOrSideWalksList);
+
+        }, 1000);
+        return () => clearInterval(interval);
+
+    }, [getMunicipalitiesList(), getSectorsList(), getComunesList(), getNeighboorhodsList(), getBlocksOrSideWalksList()]
     )
 
     const onchangeDepartmentState = (e) => {
@@ -191,10 +199,20 @@ export function AddPropertyWindow() {
         }
     }
 
-    const onChnageMunicipality = (e) => {
+    const onChangeMunicipality = (e) => {
         setPropertyMunicipalitystate(e.target.value);
         if (propertyMunicipalitystate !== '000') {
-            //getPlacesAssociatedToAPlace(propertyMunicipalitystate, 'SEC')
+            getSectorsOfAPlace(e.target.value);
+            getComunesOfAPlace(e.target.value);
+            getNeighboorhodsOfAPlace(e.target.value);
+            getBlocksOrSidewalkOfAPlace(e.target.value, propertyTypeState);
+        }
+    }
+
+    const onChangePropertyType = (e) => {
+        setPropertyTypeState(e.target.value);
+        if (propertyTypeState !== '' && propertyMunicipalitystate !== '000') {
+            getBlocksOrSidewalkOfAPlace(propertyMunicipalitystate, e.target.value);
         }
     }
 
@@ -247,7 +265,7 @@ export function AddPropertyWindow() {
                     </div>
                     <div>
                         <p>Tipo de predio *</p>
-                        <select className='input-info-property' value={propertyTypeState} onChange={(e) => setPropertyTypeState(e.target.value)} onClick={(e) => setPropertyTypeState(e.target.value)}>{
+                        <select className='input-info-property' value={propertyTypeState} onChange={onChangePropertyType} onClick={onChangePropertyType}>{
                             propertyTypeList === null ? '' :
                                 propertyTypeList.map(propertyType => {
                                     return (
@@ -291,7 +309,7 @@ export function AddPropertyWindow() {
                         <select className='input-info-property' value={propertyDepartmentState} onChange={onchangeDepartmentState} onClick={onchangeDepartmentState}>{
                             departmentsList.map(department => {
                                 return (
-                                    <option key={department.id_place} value={department.id_place}>{department.name_place}</option>
+                                    <option key={department.id_place} value={department.id_place} >{department.name_place}</option>
                                 )
                             })
                         }
@@ -299,7 +317,7 @@ export function AddPropertyWindow() {
                     </div>
                     <div>
                         <p>Municipio *</p>
-                        <select className='input-info-property' value={propertyMunicipalitystate} onChange={onChnageMunicipality} onClick={onChnageMunicipality}>
+                        <select className='input-info-property' value={propertyMunicipalitystate} onClick={(e) => setPropertyMunicipalitystate(e.target.value)} onChange={onChangeMunicipality}>
                             {
                                 municipalityList.map(municipality => (
                                     <option key={municipality.id_place} value={municipality.id_place}>
@@ -328,22 +346,43 @@ export function AddPropertyWindow() {
                     <div>
                         <p>Comuna</p>
                         <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)} onClick={(e) => setPropertySectorState(e.target.value)}>
-                            <option>Seleccione una opción</option>
+                            {comunesList.length !== 0 ?
+                                (
+                                    comunesList.map(comune => {
+                                        return (
+                                            <option key={comune.id_place} value={comune.id_place}>{comune.name_place}</option>
+                                        )
+                                    })) : <option key={'00'} value={'00'}>{'-'}</option>
+
+                            }
                         </select>
                     </div>
 
                     <div>
                         <p>Barrio</p>
                         <select className='input-info-property' value={propertyNeighboorhoodState} onChange={(e) => setPropertyNeighboorhoodState(e.target.value)} onClick={(e) => setPropertyNeighboorhoodState(e.target.value)}>
-                            <option>Seleccione una opción</option>
+                            {
+                                neighboorhodsList.length !== 0 ? (
+                                    neighboorhodsList.map(neighboorhood => {
+                                        return (
+                                            <option key={neighboorhood.id_place} value={neighboorhood.id_place}>{neighboorhood.name_place}</option>
+                                        )
+                                    })
+                                ) : <option key={'00'} value={'00'}>{'-'}</option>
+                            }
                         </select>
                     </div>
 
                     <div>
                         <p>Manzana/Vereda *</p>
                         <select className='input-info-property' value={propertyBlockOrSidewalkState} onChange={(e) => setPropertyBlockOrSideWalkState(e.target.value)} onClick={(e) => setPropertyBlockOrSideWalkState(e.target.value)}>
-                            <option>Seleccione una opción</option>
-                            <option key={'0013'} value={'0013'}>Manzana 13</option>
+                            {blocksOrSideWalkList.length !== 0 ? (
+                                blocksOrSideWalkList.map(blocksOrSideWalk => {
+                                    return (
+                                        <option key={blocksOrSideWalk.id_place} value={blocksOrSideWalk.id_place}>{blocksOrSideWalk.name_place}</option>
+                                    )
+                                })
+                            ) : <option key={'00'} value={'00'}>{'-'}</option>}
                         </select>
                     </div>
                     <div className="horizontal-property-container">
