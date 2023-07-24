@@ -68,7 +68,6 @@ export function AddPropertyWindow() {
     const [propertyComuneState, setPropertyComuneState] = useState("00")
     const [propertyNeighboorhoodState, setPropertyNeighboorhoodState] = useState("00")
     const [propertyBlockOrSidewalkState, setPropertyBlockOrSideWalkState] = useState("0000")
-    const [propertyHorizontalState, setPropertyHorizontalState] = useState("")
     const [propertyHorizontalBuildingNumberState, setPropertyHorizontalBuildingNumberState] = useState("00")
     const [propertyHorizontalFloorNumberState, setPropertyHorizontalFloorNumberState] = useState("00")
     const [propertyHorizontalUnityNumberState, setPropertyHorizontalUnityNumberState] = useState("0000")
@@ -106,7 +105,7 @@ export function AddPropertyWindow() {
             changeModalPropertyRouteErrorState(!modalPropertyRouteErrorState)
         } else if (propertyLocalizationCodeState < 0) {
             changeModalPropertyCodeLocalization(!modalPropertyCodeLocalization)
-        } else if (propertyHorizontalState && (propertyHorizontalBuildingNumberState === "" || propertyHorizontalFloorNumberState === "" || propertyHorizontalUnityNumberState === "")) {
+        } else if (horizontalPropertyRequiredState && (propertyHorizontalBuildingNumberState === "" || propertyHorizontalFloorNumberState === "" || propertyHorizontalUnityNumberState === "")) {
             changeModalHorizontalProperty(!modalHorizontalProperty)
         }
         else if (propertyNumberState !== "" ||
@@ -216,6 +215,12 @@ export function AddPropertyWindow() {
         }
     }
 
+    const onChangeOwnerShipCondition = (e) => {
+        setPropertyOwnershipConditionState(e.target.value);
+        console.log('Value: ' + e.target.value);
+        Number(e.target.value) === 9 ? setHorizontalPropertyRequiredState(true) : setHorizontalPropertyRequiredState(false)
+    }
+
     return (
         <div className='add-property'>
             <img src={addPropertyIcon} alt='' height={50} className='add-property-icon' />
@@ -253,12 +258,12 @@ export function AddPropertyWindow() {
                     <div>
                         <p>Destino económico *</p>
                         <select className='input-info-property' value={propertyEconomicDestinationState} onChange={(e) => setPropertyEconomicDestinationState(e.target.value)} onClick={(e) => setPropertyEconomicDestinationState(e.target.value)} >{
-                            economicDestinationList === null ? '' :
+                            economicDestinationList.length !== 0 ?
                                 economicDestinationList.map(economicDestination => {
                                     return (
                                         <option key={economicDestination} value={economicDestination}>{economicDestination}</option>
                                     )
-                                })
+                                }) : ''
                         }
 
                         </select>
@@ -266,24 +271,24 @@ export function AddPropertyWindow() {
                     <div>
                         <p>Tipo de predio *</p>
                         <select className='input-info-property' value={propertyTypeState} onChange={onChangePropertyType} onClick={onChangePropertyType}>{
-                            propertyTypeList === null ? '' :
+                            propertyTypeList.length !== 0 ?
                                 propertyTypeList.map(propertyType => {
                                     return (
                                         <option key={propertyType.id_property_type} value={propertyType.id_property_type}>{propertyType.property_type_name}</option>
                                     )
-                                })
+                                }) : ''
                         }
                         </select>
                     </div>
                     <div>
                         <p>Condición de propiedad *</p>
-                        <select className='input-info-property' value={propertyOwnershipConditionState} onChange={(e) => setPropertyOwnershipConditionState(e.target.value)} onClick={(e) => setPropertyOwnershipConditionState(e.target.value)}>{
-                            ownershipConditionList === null ? '' :
+                        <select className='input-info-property' value={propertyOwnershipConditionState} onChange={onChangeOwnerShipCondition} onClick={onChangeOwnerShipCondition}>{
+                            ownershipConditionList.length !== 0 ?
                                 ownershipConditionList.map(ownership => {
                                     return (
                                         <option key={ownership.id_ownership_condition} value={ownership.id_ownership_condition}>{ownership.name_ownership_condition}</option>
                                     )
-                                })
+                                }) : ''
                         }
                         </select>
                     </div>
@@ -291,12 +296,12 @@ export function AddPropertyWindow() {
                     <div>
                         <p>Estrato *</p>
                         <select className='input-info-property' value={propertyStratumState} onChange={(e) => setPropertyStratumState(e.target.value)} onClick={(e) => setPropertyStratumState(e.target.value)}>{
-                            stratumsList === null ? '' :
+                            stratumsList.length !== 0 ?
                                 stratumsList.map(stratum => {
                                     return (
                                         <option key={stratum.id_stratum} value={stratum.id_stratum}>{stratum.name_stratum}</option>
                                     )
-                                })
+                                }) : ''
                         }
                         </select>
                     </div>
@@ -307,23 +312,24 @@ export function AddPropertyWindow() {
                     <div>
                         <p>Departamento *</p>
                         <select className='input-info-property' value={propertyDepartmentState} onChange={onchangeDepartmentState} onClick={onchangeDepartmentState}>{
-                            departmentsList.map(department => {
-                                return (
-                                    <option key={department.id_place} value={department.id_place} >{department.name_place}</option>
-                                )
-                            })
+                            departmentsList.length !== 0 ?
+                                departmentsList.map(department => {
+                                    return (
+                                        <option key={department.id_place} value={department.id_place} >{department.name_place}</option>
+                                    )
+                                }) : ''
                         }
                         </select>
                     </div>
                     <div>
                         <p>Municipio *</p>
                         <select className='input-info-property' value={propertyMunicipalitystate} onClick={(e) => setPropertyMunicipalitystate(e.target.value)} onChange={onChangeMunicipality}>
-                            {
+                            {municipalityList.length !== 0 ?
                                 municipalityList.map(municipality => (
                                     <option key={municipality.id_place} value={municipality.id_place}>
                                         {municipality.name_place}
                                     </option>
-                                ))
+                                )) : ''
                             }
                         </select>
                     </div>
@@ -345,7 +351,7 @@ export function AddPropertyWindow() {
 
                     <div>
                         <p>Comuna</p>
-                        <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertySectorState(e.target.value)} onClick={(e) => setPropertySectorState(e.target.value)}>
+                        <select className='input-info-property' value={propertySectorState} onChange={(e) => setPropertyComuneState(e.target.value)} onClick={(e) => setPropertyComuneState(e.target.value)}>
                             {comunesList.length !== 0 ?
                                 (
                                     comunesList.map(comune => {
@@ -390,15 +396,15 @@ export function AddPropertyWindow() {
                         <div>
                             <div>
                                 <p>Nº del edificio/torre</p>
-                                <input className='input-horizontal-property' value={propertyHorizontalBuildingNumberState} onChange={(e) => setPropertyHorizontalBuildingNumberState(e.target.value)} placeholder='00' disabled={horizontalPropertyRequiredState ? false : true}></input>
+                                <input className='input-horizontal-property' value={horizontalPropertyRequiredState ? propertyHorizontalBuildingNumberState : '00'} onChange={(e) => setPropertyHorizontalBuildingNumberState(e.target.value)} placeholder='00' disabled={horizontalPropertyRequiredState ? false : true}></input>
                             </div>
                             <div>
                                 <p>Nº del piso</p>
-                                <input className='input-horizontal-property' value={propertyHorizontalFloorNumberState} onChange={(e) => setPropertyHorizontalFloorNumberState(e.target.value)} placeholder='00' disabled={horizontalPropertyRequiredState ? false : true}></input>
+                                <input className='input-horizontal-property' value={horizontalPropertyRequiredState ? propertyHorizontalFloorNumberState : '00'} onChange={(e) => setPropertyHorizontalFloorNumberState(e.target.value)} placeholder='00' disabled={horizontalPropertyRequiredState ? false : true}></input>
                             </div>
                             <div>
                                 <p>Nº de unidad</p>
-                                <input className='input-horizontal-property' value={propertyHorizontalFloorNumberState} onChange={(e) => setPropertyHorizontalFloorNumberState(e.target.value)} placeholder='00' disabled={horizontalPropertyRequiredState ? false : true}></input>
+                                <input className='input-horizontal-property' value={horizontalPropertyRequiredState ? propertyHorizontalUnityNumberState : '00'} onChange={(e) => setPropertyHorizontalUnityNumberState(e.target.value)} placeholder='00' disabled={horizontalPropertyRequiredState ? false : true}></input>
                             </div>
                         </div>
                     </div>
