@@ -6,6 +6,9 @@ import warningIcon from "../../../assets/images/warning.svg"
 import { getProperty } from '../../../services/PropertiesService'
 import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
 import { getEnrollmentByID } from '../../../services/EnrollmentService'
+import { getEconomicDestinationProperty } from "../../../services/EconomicDestinationService"
+import { getStratums } from "../../../services/StratumService"
+import { getOwnerShipConditions } from "../../../services/OwnershipConditionService"
 import ControlButton from '../../../components/ControlButton/ControlButton'
 import './PropertyWindow.css'
 import { useState } from 'react'
@@ -23,7 +26,21 @@ export function PropertyWindow() {
     }
 
     const handleClickEditProperty = () => {
-
+        getEconomicDestinationProperty().then(res => {
+            if (res) {
+                getStratums().then(resStratums => {
+                    if (resStratums) {
+                        getOwnerShipConditions().then(resOwnershipCondition => {
+                            if (resOwnershipCondition) {
+                                navigate('/secretary/edit-property/' + property.id_property_number)
+                            }
+                        }).catch(err => {
+                            console.log(err)
+                        })
+                    }
+                })
+            }
+        })
     }
 
     const handleClickEnrollment = (idEnrollment) => {

@@ -9,6 +9,7 @@ import { EditSubscriberWindow } from "../Subscribers/EditSubscriberWindow/EditSu
 import { PropertiesWindows } from "../Properties/PropertiesWindows/PropertiesWindows";
 import { PropertyWindow } from "../Properties/PropertyWindow/PropertyWindow";
 import { AddPropertyWindow } from "../Properties/AddPropertyWindow/AddPropertyWindow"
+import { EditPropertyWindow } from "../Properties/EditPropertyWindow/EditPropertyWindow"
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -24,6 +25,7 @@ const MainWindowSecretary = () => {
                 <Route path="properties" element={<PropertiesWindows />}></Route>
                 <Route path="property/:idProperty" element={<PropertyWindow />}></Route>
                 <Route path="register-property" element={<AddPropertyWindow />}></Route>
+                <Route path="edit-property/:id_property_number" element={<EditPropertyWindow />}></Route>
             </Routes>
         </div>
     )

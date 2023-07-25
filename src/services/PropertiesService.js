@@ -39,4 +39,21 @@ export const addProperty = (newProperty) => new Promise((resolve, reject) => {
     }).catch(err => {
         reject(err)
     })
-}) 
+})
+
+export const editProperty = (propertyEdited) => new Promise((resolve, reject) => {
+    const config = {
+        headers: {
+            token: sessionStorage.getItem('token')
+        }
+    }
+    axios.post(environment.APIHost + '/updateProperty', propertyEdited, config).then(
+        res => {
+            resolve(res)
+
+
+        }
+    ).catch(err => {
+        reject(err)
+    })
+})
