@@ -1,0 +1,90 @@
+.enrollment-window {
+    width: 85vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0px;
+}
+
+.enrollment-icon {
+    margin-top: 20px;
+}
+
+.enrollment-window>p {
+    margin: 0;
+    padding: 0;
+    font-size: var(--title-size);
+    font-weight: bold;
+}
+
+.table-enrollment-info-container {
+    margin-top: 10px;
+}
+
+.table-enrollment-info {
+    margin-bottom: 10px;
+    border-spacing: 0;
+    border: solid var(--light-blue) 1px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    font-size: var(--text-form-size);
+}
+
+.table-enrollment-info td {
+    border-left: solid var(--light-blue) 2px;
+    border-bottom: solid var(--light-blue) 2px;
+    padding-inline: 20px;
+    padding-block: 5px;
+    text-align: left;
+}
+
+.table-enrollment-info td:first-child {
+    border-left: none;
+}
+
+.table-enrollment-info tr td:first-child {
+    padding: 3px;
+    background-color: var(--light-blue-opaque-color-80);
+    padding-inline-start: 10px;
+    padding-inline-end: 20px;
+    padding-block: 5px;
+    font-weight: bold;
+}
+
+.table-enrollment-info tr td:last-child {
+    padding: 3px;
+    background-color: var(--light-blue-opaque-color-10);
+    padding-inline: 10px;
+}
+
+.table-enrollment-info tr:first-child td:first-child {
+    border-top-left-radius: 9px;
+}
+
+.table-enrollment-info tr:first-child td:last-child {
+    border-top-right-radius: 9px;
+}
+
+.table-enrollment-info tr:last-child td:first-child {
+    border-bottom-left-radius: 9px;
+}
+
+.table-enrollment-info tr:last-child td:last-child {
+    border-bottom-right-radius: 9px;
+}
+
+.watermeter-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-block: 10px;
+}
+
+.watermeter-info-container>p {
+    margin: 0;
+    padding: 0;
+    font-size: var(--text-size);
+    font-weight: bold;
+}

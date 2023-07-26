@@ -217,7 +217,6 @@ export function AddPropertyWindow() {
 
     const onChangeOwnerShipCondition = (e) => {
         setPropertyOwnershipConditionState(e.target.value);
-        console.log('Value: ' + e.target.value);
         Number(e.target.value) === 9 ? setHorizontalPropertyRequiredState(true) : setHorizontalPropertyRequiredState(false)
     }
 
