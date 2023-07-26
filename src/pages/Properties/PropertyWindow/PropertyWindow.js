@@ -67,7 +67,7 @@ export function PropertyWindow() {
                     <tbody>
                         <tr>
                             <td>Nº predial</td>
-                            <td>{property.id_property_number}</td>
+                            <td>{('000000000000000000000000000000' + property.id_property_number).slice(-30)}</td>
                         </tr>
                         <tr>
                             <td>Nombre</td>

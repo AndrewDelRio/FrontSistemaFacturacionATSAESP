@@ -56,7 +56,7 @@ export function SubscriberWindow() {
                     <tbody>
                         <tr>
                             <td>{subscriber.document_type_abbreviation || 'Documento'}</td>
-                            <td>{subscriber.id_subscriber}</td>
+                            <td>{('0000000000' + subscriber.id_subscriber).slice(-10)}</td>
                         </tr>
                         <tr>
                             <td>Direccion</td>
@@ -90,7 +90,7 @@ export function SubscriberWindow() {
                         </tr>
                     </thead>
                     <tbody>
-                        {subscriber.listEnrollments ? subscriber.listEnrollments.map((enrollment) => {
+                        {subscriber.listEnrollments.length != 0 ? subscriber.listEnrollments.map((enrollment) => {
                             return (
                                 <tr key={enrollment.id_enrollment}>
                                     <td>{enrollment.id_enrollment}</td>
