@@ -1,7 +1,8 @@
 import axios from "axios"
 import { environment } from "../environment/Environment"
 
-let subscriber = {}
+let subscriber = []
+let subscribersList = []
 
 export const getSubscriberByID = (idSubscriber) => new Promise((resolve, reject) => {
     const config = {
@@ -56,3 +57,26 @@ export const editSubscriber = (subscriberEdited) => new Promise((resolve, reject
             }
         )
 })
+
+export const getAllSubscribers = () => new Promise((resolve, reject) => {
+    const config = {
+        headers: {
+            token: sessionStorage.getItem('token')
+        }
+    }
+    axios.get(environment.APIHost + '/getAllSubscribers', config).then(result => {
+        if (result.data.ok) {
+            subscribersList = result.data.result;
+            resolve(true)
+        } else {
+            resolve(false)
+        }
+
+    }).catch(err => {
+        reject(err)
+    })
+});
+
+export const getSubscribersList = () => {
+    return subscribersList;
+}

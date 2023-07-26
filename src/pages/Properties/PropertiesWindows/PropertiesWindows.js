@@ -12,7 +12,7 @@ import { getAddressInformationProperties } from "../../../services/PlacesService
 import { getPropertyTypes } from "../../../services/PropertiesTypeService"
 import { getOwnerShipConditions } from "../../../services/OwnershipConditionService"
 import { getStratums } from "../../../services/StratumService"
-import './PropertiesWindows.css'
+import './PropertiesWindow.css'
 const defaultIconsColor = "#FFFFFF"
 
 export function PropertiesWindows() {
@@ -70,18 +70,18 @@ export function PropertiesWindows() {
         })
     }
     return (
-        <div className='enrollments'>
-            <img alt='' src={propertyIcon} height={100} className='enrollments-icon'></img>
-            <p className='enrollments-title'><b>Predios</b></p>
-            <div className='form-search-enrollment'>
-                <div className='search-enrollment'>
-                    <input type='number' placeholder='Nº de predio' className='input-id-enrollment' value={idProperty} onChange={(e => setIdProperty(e.target.value))} onKeyDown={(e) => onEnterKeySearchProperty(e)} />
-                    <button onClick={handleClickSearchProperty} className='button-search-properties'>
+        <div className='properties'>
+            <img alt='' src={propertyIcon} height={100} className='properties-icon'></img>
+            <p className='properties-title'><b>Predios</b></p>
+            <div className='form-search-property'>
+                <div className='search-property'>
+                    <input type='number' placeholder='Nº de predio' className='input-id-property' value={idProperty} onChange={(e => setIdProperty(e.target.value))} onKeyDown={(e) => onEnterKeySearchProperty(e)} />
+                    <button onClick={handleClickSearchProperty} className='button-search-property'>
                         <img src={searchIcon} alt='' width={40} height={40} fill={defaultIconsColor}></img>
                     </button>
                 </div>
-                <button onClick={handleClickAddProperty} className='button-register-properties'>
-                    <img src={addPropertyIcon} alt='' width={40} height={40} fill={defaultIconsColor} className='add-enrollment-icon-button'></img>
+                <button onClick={handleClickAddProperty} className='button-register-property'>
+                    <img src={addPropertyIcon} alt='' width={40} height={40} fill={defaultIconsColor} className='add-property-icon-button'></img>
                     <p>Registrar predio</p>
                 </button>
             </div>

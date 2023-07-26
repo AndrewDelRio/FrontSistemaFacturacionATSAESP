@@ -43,14 +43,14 @@
     padding: 10px;
 }
 
-.button-search-properties {
+.button-search-enrollment {
     padding-block: 5px;
     padding-inline: 5px;
     margin: 0;
     background-color: var(--light-blue);
 }
 
-.button-register-properties {
+.button-register-enrollment {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -61,7 +61,7 @@
     margin: 1%;
 }
 
-.button-register-properties>p {
+.button-register-enrollment>p {
     margin: 0;
     padding: 0;
     font-size: var(--text-size);

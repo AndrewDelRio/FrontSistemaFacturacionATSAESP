@@ -1,7 +1,8 @@
 import axios from "axios";
 import { environment } from "../environment/Environment"
 
-let property = {}
+let property = []
+let propertiesList = []
 
 export const getPropertyByID = (idProperty) => new Promise((resolve, reject) => {
     const config = {
@@ -49,11 +50,31 @@ export const editProperty = (propertyEdited) => new Promise((resolve, reject) =>
     }
     axios.post(environment.APIHost + '/updateProperty', propertyEdited, config).then(
         res => {
-            resolve(res)
-
-
+            resolve(true)
         }
     ).catch(err => {
         reject(err)
     })
 })
+
+export const getAllProperties = () => new Promise((resolve, reject) => {
+    const config = {
+        headers: {
+            token: sessionStorage.getItem('token')
+        }
+    }
+    axios.get(environment.APIHost + '/getAllProperties', config).then(res => {
+        if (res.data.ok) {
+            propertiesList = res.data.result
+            resolve(true)
+        } else {
+            resolve(false)
+        }
+    }).catch((err) => {
+        reject(err)
+    })
+})
+
+export const getPropertiesList = () => {
+    return propertiesList;
+}

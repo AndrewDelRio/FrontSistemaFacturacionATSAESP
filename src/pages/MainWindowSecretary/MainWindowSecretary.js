@@ -10,6 +10,7 @@ import { PropertiesWindows } from "../Properties/PropertiesWindows/PropertiesWin
 import { PropertyWindow } from "../Properties/PropertyWindow/PropertyWindow";
 import { AddPropertyWindow } from "../Properties/AddPropertyWindow/AddPropertyWindow"
 import { EditPropertyWindow } from "../Properties/EditPropertyWindow/EditPropertyWindow"
+import EnrollmentsWindows from "../Enrollments/EnrollmentsWindow/EnrollmentsWindow"
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -26,6 +27,7 @@ const MainWindowSecretary = () => {
                 <Route path="property/:idProperty" element={<PropertyWindow />}></Route>
                 <Route path="register-property" element={<AddPropertyWindow />}></Route>
                 <Route path="edit-property/:id_property_number" element={<EditPropertyWindow />}></Route>
+                <Route path="enrollments" element={<EnrollmentsWindows />}></Route>
             </Routes>
         </div>
     )
