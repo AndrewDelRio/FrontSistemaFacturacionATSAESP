@@ -13,7 +13,7 @@ export default function ChangePasswordWindow() {
     const [wrongPassword, setWrongPassword] = useState("")
     const [firstPassword, setFirstPassword] = useState("")
     const [secondPassword, setSecondPassword] = useState("")
-    const [emptyPassword, setEmptyPassword] = useState("")
+    // const [emptyPassword, setEmptyPassword] = useState("")
 
     const backConfirmation = () => {
         const role = sessionStorage.getItem('id_role');
