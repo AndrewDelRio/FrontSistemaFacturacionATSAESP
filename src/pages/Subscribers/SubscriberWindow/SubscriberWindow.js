@@ -90,7 +90,7 @@ export function SubscriberWindow() {
                         </tr>
                     </thead>
                     <tbody>
-                        {subscriber.listEnrollments.length != 0 ? subscriber.listEnrollments.map((enrollment) => {
+                        {subscriber.listEnrollments.length !== 0 ? subscriber.listEnrollments.map((enrollment) => {
                             return (
                                 <tr key={enrollment.id_enrollment}>
                                     <td>{enrollment.id_enrollment}</td>

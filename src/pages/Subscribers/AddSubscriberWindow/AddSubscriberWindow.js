@@ -129,7 +129,6 @@ export function AddSubscriberWindow() {
     const handleLoadCities = function (e) {
         const option = e.target.value;
         setDepartmentState(option);
-        console.log(departmentState);
     }
 
     return (

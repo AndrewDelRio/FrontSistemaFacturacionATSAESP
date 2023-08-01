@@ -53,7 +53,7 @@ const EnrollmentsWindows = () => {
                                     if (resFinancings) {
                                         getAllServicesPublic().then(resServicesPublic => {
                                             if (resServicesPublic) {
-                                                navigate('/secretary/register-enrollent')
+                                                navigate('/secretary/register-enrollment')
                                             }
                                         })
 
