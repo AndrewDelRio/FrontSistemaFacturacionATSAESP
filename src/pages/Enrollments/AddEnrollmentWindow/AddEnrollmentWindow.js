@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { useAsyncError, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import addEnrollmentIcon from "../../../assets/images/addEnrollment.svg"
 import warningIcon from "../../../assets/images/warning.svg"
 import { ModalMessagePerformed } from '../../../components/ModalMessagePerformed/ModalMessagePerformed'
@@ -11,7 +11,7 @@ import { getPropertiesList } from "../../../services/PropertiesService"
 import { getUsesPublicServiceList } from "../../../services/UsePublicService"
 import { getFinancingList } from "../../../services/FinancingService"
 import { getServicesPublicList } from "../../../services/DomesticPublicServices"
-import { addEnrollment } from "../../../services/EnrollmentService"
+import { addEnrollment, getEnrollmentID } from "../../../services/EnrollmentService"
 import { addWaterMeter } from "../../../services/WaterMeterService"
 import './AddEnrollmentWindow.css'
 
@@ -44,6 +44,7 @@ export function AddEnrollmentWindow() {
     const [modalWaterMeterErrorState, changeModalWaterMeterErrorState] = useState(false)
     const [modalWarningWaterMeterState, changeModalWarningWaterMeterState] = useState(false)
     const [modalStateBack, changeModalStateBack] = useState(false)
+
     const [modalErrorAdwaradDate, setmodalErrorAdwaradDate] = useState(false)
     const [modalErrorSerialWatermeter, setModalErrorSerialWatermeter] = useState(false)
     const [modalErrorBrandWatermeter, setModalErrorBrandWatermeter] = useState(false)
@@ -55,8 +56,7 @@ export function AddEnrollmentWindow() {
     const [associatedSubscriberState, setAssociatedSubscriberState] = useState(subscriberList.length > 0 ? subscriberList[0].id_subscriber : '')
     const [associatedPropertyState, setassociatedPropertyState] = useState(propertiesList.length > 0 ? propertiesList[0].id_property_number : '')
     const [serviceTypeState, setServiceTypeState] = useState(usePublicServiceList.length > 0 ? usePublicServiceList[0].id_use_public_service : '')
-    const [idFinancingState, setIdFinancing] = useState("")
-    const [financingCuotesState, setFinancingCuotesState] = useState("0")
+    const [financingCuotesState, setFinancingCuotesState] = useState(cuotesList.length > 0 ? cuotesList[0] : '')
     const [waterMeterState, setWaterMeterState] = useState(waterMeterRegisterOptions.length > 0 ? waterMeterRegisterOptions[0].state : false)
     const [serialWaterMeterState, setSerialWaterMeterState] = useState("")
     const [brandWaterMeterState, setBrandWaterMeterState] = useState("")
@@ -73,6 +73,7 @@ export function AddEnrollmentWindow() {
         navigate('/secretary/enrollments')
     }
 
+
     /**
      * Validar si un check está seleccionado
      * @param {*} position 
@@ -86,64 +87,63 @@ export function AddEnrollmentWindow() {
         setServicePublicListState(updatedCheckedState);
     }
 
+    const handleClickBackButton = () => {
+        changeModalStateBack(!modalStateBack);
+    }
+
     const handleClickAddEnrollment = (e) => {
         e.preventDefault()
-        if (associatedSubscriberState === "" || associatedPropertyState === "") {
+        if (adwardDateState === "" || associatedSubscriberState === "" || associatedPropertyState === "" || serviceTypeState === "" || financingCuotesState === "") {
             changeModalWarningState(!modalWarningState)
         } else {
-            if (!(waterMeterState) &&
-                adwardDateState !== "" &&
-                associatedSubscriberState !== "" &&
-                associatedPropertyState !== "" &&
-                serviceTypeState !== "" &&
-                idFinancingState !== "" &&
-                financingCuotesState !== "") {
+            if (waterMeterState && (serialWaterMeterState === "" || brandWaterMeterState === "" ||
+                diameterWaterMeterState === "" || calibrationPercentageState === "" || calibrationDateState === "")) {
+                changeModalWarningWaterMeterState(!modalWarningWaterMeterState)
+            } else {
                 const newEnrollment = {
                     date_adward: adwardDateState,
-                    id_financing: Number(idFinancingState),
+                    id_financing: Number(financingList.id_financing),
                     id_property_number: associatedPropertyState,
                     id_subscriber: Number(associatedSubscriberState),
                     cuotes_financing: Number(financingCuotesState),
                 }
-                addEnrollment(newEnrollment).then((resEnrollment) => {
-                    if (resEnrollment.data.ok) {
-                        setIdEnrollmentState(resEnrollment.data.result)
-                        changeModalState(!modalState)
-                    }
-                }).catch((err) => {
-                    changeModalErrorState(!modalErrorState)
-                })
-            } else if (waterMeterState &&
-                (serialWaterMeterState === "" ||
-                    brandWaterMeterState === "" ||
-                    diameterWaterMeterState === "" ||
-                    calibrationPercentageState === "" ||
-                    calibrationDateState === "")) {
-                changeModalWarningWaterMeterState(!modalWarningWaterMeterState)
-            } else if (waterMeterState &&
-                (serialWaterMeterState !== "" &&
-                    brandWaterMeterState !== "" &&
-                    diameterWaterMeterState !== "" &&
-                    calibrationPercentageState !== "" &&
-                    calibrationDateState !== "" &&
-                    idEnrollmentState !== "")) {
-                let newWatermeter = {
-                    serial_water_meter: Number(serialWaterMeterState),
-                    brand_water_meter: brandWaterMeterState,
-                    diameter_water_meter: parseFloat(diameterWaterMeterState),
-                    calibration_percentage_water_meter: parseFloat(calibrationPercentageState),
-                    date_calibration_water_meter: calibrationDateState,
-                    state_water_meter: true,
-                    id_enrollment: idEnrollmentState
+                if (waterMeterState) {
+                    addEnrollment(newEnrollment).then((resEnrollment) => {
+                        if (resEnrollment) {
+                            setIdEnrollmentState(getEnrollmentID())
+                            const newWatermeter = {
+                                serial_water_meter: Number(serialWaterMeterState),
+                                brand_water_meter: brandWaterMeterState,
+                                diameter_water_meter: parseFloat(diameterWaterMeterState),
+                                calibration_percentage_water_meter: parseFloat(calibrationPercentageState),
+                                date_calibration_water_meter: calibrationDateState,
+                                id_enrollment: getEnrollmentID()
+                            }
+                            addWaterMeter(newWatermeter).then((res) => {
+                                if (res) {
+                                    changeModalState(!modalState)
+                                }
+                            }).catch((err) => {
+                                changeModalWaterMeterErrorState(!modalWaterMeterErrorState)
+                            })
+                        }
+                    }).catch((err) => {
+                        changeModalErrorState(!modalErrorState)
+                    })
+
+                } else {
+                    addEnrollment(newEnrollment).then((resEnrollment) => {
+                        if (resEnrollment) {
+                            setIdEnrollmentState(getEnrollmentID())
+                            changeModalState(!modalState)
+                        }
+                    }).catch((err) => {
+                        changeModalErrorState(!modalErrorState)
+                    })
                 }
-                addWaterMeter(newWatermeter).then((res) => {
-                    if (res.data.ok) {
-                        changeModalState(!modalState)
-                    }
-                }).catch((err) => {
-                    changeModalWaterMeterErrorState(!modalWaterMeterErrorState)
-                })
             }
+
+
         }
     }
 
@@ -280,17 +280,49 @@ export function AddEnrollmentWindow() {
                             return (
                                 <label className='options-check-data' key={service.id_domestic_public_service} value={service.id_domestic_public_service}><input type='checkbox' checked={servicePublicListState[i]} onChange={() => handleOnChangeCheckBox(i)} />{service.name_domestic_public_service}</label>
                             )
-                        }) : <input type='checkbox' id='0' value={0}>{'-'}</input>}
+                        }) : <label className='options-check-data' key={0} value={0}>{'No registran servicios públicos'}</label>}
                 </div>
             </div>
             <div className='control-button'>
                 <ControlButton
                     titleAceptButton={"Registrar"}
                     titleBackButton={"Volver"}
-                    acceptFunction={null}
-                    backFunction={null}
+                    acceptFunction={handleClickAddEnrollment}
+                    backFunction={() => changeModalStateBack(!modalStateBack)}
                 />
             </div>
+            <ModalMessagePerformed
+                img={addEnrollmentIcon}
+                title="Aviso"
+                message={"Matricula registrada exitosamente con el Código: " + ('00000' + idEnrollmentState).slice(-5)}
+                state={modalState}
+                accept={handleClickBackToEnrollments}
+            />
+
+            <ModalMessagePerformed
+                img={warningIcon}
+                title="Aviso"
+                message="Algunos datos son obligatorios"
+                state={modalWarningState}
+                accept={handleClickAddEnrollment}
+            />
+
+            <ModalMessagePerformed
+                img={warningIcon}
+                title="Aviso"
+                message="Algunos datos del medidor son obligatorios"
+                state={modalWarningWaterMeterState}
+                accept={handleClickAddEnrollment}
+            />
+
+            <ModalActionPerformed
+                img={warningIcon}
+                title={"¿Deseas salir?"}
+                message={"¡¡Se perderá toda la información sin guardar!!"}
+                state={modalStateBack}
+                accept={handleClickBackToEnrollments}
+                cancel={handleClickBackButton}
+            />
         </div >
     )
 }

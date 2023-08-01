@@ -33,7 +33,7 @@ export const addEnrollment = (newEnrollment) => new Promise((resolve, reject) =>
             token: sessionStorage.getItem('token')
         }
     }
-    axios.post(enrollment.APIHost + '/addEnrollment', newEnrollment, config).then(res => {
+    axios.post(environment.APIHost + '/addEnrollment', newEnrollment, config).then(res => {
         if (res.data.ok) {
             enrollmentId = res.data.result
             resolve(true)
