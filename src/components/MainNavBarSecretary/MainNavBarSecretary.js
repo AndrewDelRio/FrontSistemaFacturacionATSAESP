@@ -17,11 +17,11 @@ const MainNavBar = () => {
     return (
         <div className="nav-bar">
             <div className="logo-container">
-                <NavLink to="">
-                    <div className="nav-bar-image">
-                        <img alt="" src={logoApp} width={100}></img>
-                    </div>
-                </NavLink>
+
+                <div className="nav-bar-image">
+                    <img alt="" src={logoApp} width={100}></img>
+                </div>
+
             </div>
             <div className="nav-container">
                 <nav>
