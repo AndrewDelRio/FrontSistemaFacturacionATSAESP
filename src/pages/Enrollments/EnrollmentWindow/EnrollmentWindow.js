@@ -4,6 +4,8 @@ import ControlButton from "../../../components/ControlButton/ControlButton"
 import enrollmentIcon from "../../../assets/images/enrollment.svg"
 import { getEnrollment, getEnrollmentStates } from '../../../services/EnrollmentService'
 import { getAllUsesPublicServices } from "../../../services/UsePublicService"
+import { getAllSubscribers } from "../../../services/SubscriberService"
+import { getAllProperties } from '../../../services/PropertiesService'
 import './EnrollmentWindow.css'
 
 let enrollment = {};
@@ -23,7 +25,16 @@ export function EnrollmentWindow() {
             if (resEnrollmentStates) {
                 getAllUsesPublicServices().then(resUsesService => {
                     if (resUsesService) {
-                        navigate('/secretary/edit-enrollment/' + enrollment.id_enrollment)
+                        getAllSubscribers().then(resSubscribers => {
+                            if (resSubscribers) {
+                                getAllProperties().then(resProperties => {
+                                    if (resProperties) {
+                                        navigate('/secretary/edit-enrollment/' + enrollment.id_enrollment)
+                                    }
+                                })
+                            }
+                        })
+
                     }
                 }).catch(errUsesService => {
                     console.log(errUsesService)

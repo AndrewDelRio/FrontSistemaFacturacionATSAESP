@@ -1,0 +1,113 @@
+.edit-enrollment {
+    width: 85vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2px;
+}
+
+.edit-enrollment-icon {
+    margin-top: 10px;
+}
+
+.edit-enrollment>p {
+    margin: 0;
+    padding: 0;
+    font-size: var(--title-small-size);
+}
+
+.edit-enrollment>p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.edit-enrollment-form {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+}
+
+.edit-enrollment-form>p {
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+}
+
+.input-info-enrollment {
+    width: 200px;
+    border: gray solid 2px;
+    border-radius: 10px;
+    font-size: var(--text-form-size);
+    padding-inline: 10px;
+    padding-block: 5px;
+    text-align: center;
+}
+
+.input-info-enrollment-enabled {
+    width: 200px;
+    border: black solid 2px;
+    border-radius: 10px;
+    font-size: var(--text-form-size);
+    padding-inline: 10px;
+    padding-block: 5px;
+    text-align: center;
+}
+
+.input-info-enrollment-enabled>p {
+    font-weight: bold;
+}
+
+.edit-enrollment-form>div {
+    display: grid;
+    margin-top: 0px;
+}
+
+.enrrollment-identification-container {
+    border: var(--light-blue) solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    row-gap: 0px;
+    column-gap: 0px;
+    padding: 5px;
+}
+
+.enrrollment-identification-container>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size);
+}
+
+.watermeter-dates-container {
+    border: var(--light-blue) solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    row-gap: 0px;
+    column-gap: 0px;
+    padding: 5px;
+}
+
+.watermeter-dates-container>div>p {
+    margin: 0;
+    font-size: var(--nav-bar-text-size);
+}
+
+.input-enabled {
+    font-size: var(--text-form-size);
+    font-weight: bold;
+    text-align: center;
+}
+
+.control-button {
+    margin-top: 20px;
+    width: 100%;
+    justify-content: center;
+    justify-items: center;
+}

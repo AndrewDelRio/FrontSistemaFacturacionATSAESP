@@ -13,6 +13,7 @@ import { EditPropertyWindow } from "../Properties/EditPropertyWindow/EditPropert
 import EnrollmentsWindows from "../Enrollments/EnrollmentsWindow/EnrollmentsWindow"
 import { EnrollmentWindow } from "../Enrollments/EnrollmentWindow/EnrollmentWindow"
 import { AddEnrollmentWindow } from "../Enrollments/AddEnrollmentWindow/AddEnrollmentWindow"
+import { EditEnrollmentWindow } from "../Enrollments/EditEnrollmentWindow/EditEnrollmentWindow";
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -32,6 +33,7 @@ const MainWindowSecretary = () => {
                 <Route path="enrollments" element={<EnrollmentsWindows />}></Route>
                 <Route path="enrollment/:idEnrollment" element={<EnrollmentWindow />}></Route>
                 <Route path="register-enrollment" element={<AddEnrollmentWindow />}></Route>
+                <Route path="edit-enrollment/:id_enrollment" element={<EditEnrollmentWindow />}></Route>
             </Routes>
         </div>
     )
