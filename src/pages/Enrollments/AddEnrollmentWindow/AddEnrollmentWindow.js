@@ -13,6 +13,7 @@ import { getFinancingList } from "../../../services/FinancingService"
 import { getServicesPublicList } from "../../../services/DomesticPublicServices"
 import { addEnrollment, getEnrollmentID } from "../../../services/EnrollmentService"
 import { addWaterMeter } from "../../../services/WaterMeterService"
+import { addServicePublicToListContracted } from "../../../services/ContractedPublicServiceService"
 import './AddEnrollmentWindow.css'
 
 let subscriberList = []
@@ -43,20 +44,14 @@ export function AddEnrollmentWindow() {
     const [modalErrorState, changeModalErrorState] = useState(false)
     const [modalWaterMeterErrorState, changeModalWaterMeterErrorState] = useState(false)
     const [modalWarningWaterMeterState, changeModalWarningWaterMeterState] = useState(false)
+    const [modalWarningPublicServices, changeModalWarningPublicServices] = useState(false)
     const [modalStateBack, changeModalStateBack] = useState(false)
-
-    const [modalErrorAdwaradDate, setmodalErrorAdwaradDate] = useState(false)
-    const [modalErrorSerialWatermeter, setModalErrorSerialWatermeter] = useState(false)
-    const [modalErrorBrandWatermeter, setModalErrorBrandWatermeter] = useState(false)
-    const [modalErrorDiameterWatermeter, setmodalErrorDiameterWatermeter] = useState(false)
-    const [modalErrorCalibrationPercentage, setModalErrorCalibrationPercentage] = useState(false)
-    const [modalErrorCalibrationDate, setmodalErrorCalibrationDate] = useState(false)
 
     const [adwardDateState, setAdwardDateState] = useState("")
     const [associatedSubscriberState, setAssociatedSubscriberState] = useState(subscriberList.length > 0 ? subscriberList[0].id_subscriber : '')
     const [associatedPropertyState, setassociatedPropertyState] = useState(propertiesList.length > 0 ? propertiesList[0].id_property_number : '')
     const [serviceTypeState, setServiceTypeState] = useState(usePublicServiceList.length > 0 ? usePublicServiceList[0].id_use_public_service : '')
-    const [financingCuotesState, setFinancingCuotesState] = useState(cuotesList.length > 0 ? cuotesList[0] : '')
+    const [financingCuotesState, setFinancingCuotesState] = useState(cuotesList.length > 0 ? cuotesList[0] : 0)
     const [waterMeterState, setWaterMeterState] = useState(waterMeterRegisterOptions.length > 0 ? waterMeterRegisterOptions[0].state : false)
     const [serialWaterMeterState, setSerialWaterMeterState] = useState("")
     const [brandWaterMeterState, setBrandWaterMeterState] = useState("")
@@ -73,6 +68,16 @@ export function AddEnrollmentWindow() {
         navigate('/secretary/enrollments')
     }
 
+    const createListContractedPublicServices = () => {
+        let servicePublicList = [];
+        for (let i = 0; i < servicePublicListState.length; i++) {
+            if (servicePublicListState[i]) {
+                servicePublicList.push(servicesPublicList[i].id_domestic_public_service);
+            }
+
+        }
+        return servicePublicList;
+    }
 
     /**
      * Validar si un check está seleccionado
@@ -100,50 +105,79 @@ export function AddEnrollmentWindow() {
                 diameterWaterMeterState === "" || calibrationPercentageState === "" || calibrationDateState === "")) {
                 changeModalWarningWaterMeterState(!modalWarningWaterMeterState)
             } else {
-                const newEnrollment = {
-                    date_adward: adwardDateState,
-                    id_financing: Number(financingList.id_financing),
-                    id_property_number: associatedPropertyState,
-                    id_subscriber: Number(associatedSubscriberState),
-                    cuotes_financing: Number(financingCuotesState),
-                }
-                if (waterMeterState) {
-                    addEnrollment(newEnrollment).then((resEnrollment) => {
-                        if (resEnrollment) {
-                            setIdEnrollmentState(getEnrollmentID())
-                            const newWatermeter = {
-                                serial_water_meter: Number(serialWaterMeterState),
-                                brand_water_meter: brandWaterMeterState,
-                                diameter_water_meter: parseFloat(diameterWaterMeterState),
-                                calibration_percentage_water_meter: parseFloat(calibrationPercentageState),
-                                date_calibration_water_meter: calibrationDateState,
-                                id_enrollment: getEnrollmentID()
-                            }
-                            addWaterMeter(newWatermeter).then((res) => {
-                                if (res) {
-                                    changeModalState(!modalState)
-                                }
-                            }).catch((err) => {
-                                changeModalWaterMeterErrorState(!modalWaterMeterErrorState)
-                            })
-                        }
-                    }).catch((err) => {
-                        changeModalErrorState(!modalErrorState)
-                    })
-
+                let counter = 0;
+                servicePublicListState.forEach(element => {
+                    if (element === false) {
+                        counter++;
+                    }
+                });
+                if (counter === servicePublicListState.length) {
+                    changeModalWarningPublicServices(!modalWarningPublicServices)
                 } else {
-                    addEnrollment(newEnrollment).then((resEnrollment) => {
-                        if (resEnrollment) {
-                            setIdEnrollmentState(getEnrollmentID())
-                            changeModalState(!modalState)
-                        }
-                    }).catch((err) => {
-                        changeModalErrorState(!modalErrorState)
-                    })
+                    const newEnrollment = {
+                        date_adward: adwardDateState,
+                        id_financing: Number(financingList.id_financing),
+                        id_property_number: associatedPropertyState,
+                        id_subscriber: Number(associatedSubscriberState),
+                        cuotes_financing: Number(financingCuotesState),
+                        id_use_public_service: Number(serviceTypeState)
+                    }
+                    if (waterMeterState) {
+                        addEnrollment(newEnrollment).then((resEnrollment) => {
+                            if (resEnrollment) {
+                                setIdEnrollmentState(getEnrollmentID())
+                                const newWatermeter = {
+                                    serial_water_meter: Number(serialWaterMeterState),
+                                    brand_water_meter: brandWaterMeterState,
+                                    diameter_water_meter: parseFloat(diameterWaterMeterState),
+                                    calibration_percentage_water_meter: parseFloat(calibrationPercentageState),
+                                    date_calibration_water_meter: calibrationDateState,
+                                    id_enrollment: getEnrollmentID()
+                                }
+                                addWaterMeter(newWatermeter).then((res) => {
+                                    if (res) {
+                                        let data = {
+                                            servicePublicList: createListContractedPublicServices(),
+                                            id_enrollment: getEnrollmentID()
+                                        }
+                                        addServicePublicToListContracted(data).then((res) => {
+                                            if (res) {
+                                                changeModalState(!modalState)
+                                            }
+                                        }).catch((err) => {
+                                            changeModalErrorState(!modalErrorState)
+                                        })
+                                    }
+                                }).catch((err) => {
+                                    changeModalWaterMeterErrorState(!modalWaterMeterErrorState)
+                                })
+                            }
+                        }).catch((err) => {
+                            changeModalErrorState(!modalErrorState)
+                        })
+                    } else {
+                        addEnrollment(newEnrollment).then((resEnrollment) => {
+                            if (resEnrollment) {
+                                setIdEnrollmentState(getEnrollmentID())
+                                let data = {
+                                    servicePublicList: createListContractedPublicServices(),
+                                    id_enrollment: getEnrollmentID()
+                                }
+                                addServicePublicToListContracted(data).then((res) => {
+                                    if (res) {
+                                        changeModalState(!modalState)
+                                    }
+                                }).catch((err) => {
+                                    changeModalErrorState(!modalErrorState)
+                                })
+
+                            }
+                        }).catch((err) => {
+                            changeModalErrorState(!modalErrorState)
+                        })
+                    }
                 }
             }
-
-
         }
     }
 
@@ -224,7 +258,7 @@ export function AddEnrollmentWindow() {
 
                     <div>
                         <p>Cuota mensual</p>
-                        <input className='input-info-enrollment' placeholder='0.0' type='number' disabled={true} value={financingList.value_financing !== null ? Number.parseFloat((financingList.value_financing / financingCuotesState) + ((financingList.value_financing * financingList.percentage_interest) / 100)).toFixed(2) : 0}></input>
+                        <input className='input-info-enrollment' placeholder='0.0' type='number' disabled={true} value={financingList.value_financing !== null ? Number.parseFloat((financingList.value_financing / financingCuotesState) + ((financingCuotesState !== '1') ? ((financingList.value_financing * financingList.percentage_interest) / 100) : 0)).toFixed(2) : 0}></input>
                     </div>
                 </div>
                 <p>Datos del medidor</p>
@@ -278,7 +312,7 @@ export function AddEnrollmentWindow() {
                     {servicesPublicList != null && servicesPublicList.length > 0 ?
                         servicesPublicList.map((service, i) => {
                             return (
-                                <label className='options-check-data' key={service.id_domestic_public_service} value={service.id_domestic_public_service}><input type='checkbox' checked={servicePublicListState[i]} onChange={() => handleOnChangeCheckBox(i)} />{service.name_domestic_public_service}</label>
+                                <label className='options-check-data' key={service.id_domestic_public_service} value={service.id_domestic_public_service}><input type='checkbox' checked={servicePublicListState[i]} onChange={() => handleOnChangeCheckBox(i)} onClick={() => handleOnChangeCheckBox(i)} />{service.name_domestic_public_service}</label>
                             )
                         }) : <label className='options-check-data' key={0} value={0}>{'No registran servicios públicos'}</label>}
                 </div>
@@ -312,6 +346,13 @@ export function AddEnrollmentWindow() {
                 title="Aviso"
                 message="Algunos datos del medidor son obligatorios"
                 state={modalWarningWaterMeterState}
+                accept={handleClickAddEnrollment}
+            />
+            <ModalMessagePerformed
+                img={warningIcon}
+                title="Aviso"
+                message="Debes seleccionar al menos un servicio público"
+                state={modalWarningPublicServices}
                 accept={handleClickAddEnrollment}
             />
 
