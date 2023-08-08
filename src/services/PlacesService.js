@@ -204,7 +204,6 @@ export const getBlocksOrSidewalkOfAPlace = (id_place, property_type) => new Prom
         abbreviationPropertyType = 'OTC'
     }
     axios.get(environment.APIHost + '/getPlacesAssociatedToAPlace/' + id_place + '/' + abbreviationPropertyType, config).then(resultPlaces => {
-        console.log(resultPlaces.data.result);
         if (resultPlaces.data.ok) {
             blocksOrSideWalks = resultPlaces.data.result;
             resolve(true)

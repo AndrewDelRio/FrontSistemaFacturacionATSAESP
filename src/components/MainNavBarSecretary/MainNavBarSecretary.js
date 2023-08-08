@@ -46,7 +46,7 @@ const MainNavBar = () => {
                         </li>
 
                         <li>
-                            <NavLink to="/secretary/Billings" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
+                            <NavLink to="/secretary/billing" className={({ isActive }) => (isActive ? "nav-option-active" : "nav-option")}>
                                 <img alt="" src={InvoiceIcon} width={30} height={30} fill={defaultNavIconsColor} className="icon-active" />
                                 <p><b>Facturación</b></p>
                             </NavLink>

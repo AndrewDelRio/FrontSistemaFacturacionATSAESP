@@ -14,6 +14,7 @@ import EnrollmentsWindows from "../Enrollments/EnrollmentsWindow/EnrollmentsWind
 import { EnrollmentWindow } from "../Enrollments/EnrollmentWindow/EnrollmentWindow"
 import { AddEnrollmentWindow } from "../Enrollments/AddEnrollmentWindow/AddEnrollmentWindow"
 import { EditEnrollmentWindow } from "../Enrollments/EditEnrollmentWindow/EditEnrollmentWindow";
+import { BillingWindow } from "../Billings/BillingWindows/BillingWindow";
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -34,6 +35,7 @@ const MainWindowSecretary = () => {
                 <Route path="enrollment/:idEnrollment" element={<EnrollmentWindow />}></Route>
                 <Route path="register-enrollment" element={<AddEnrollmentWindow />}></Route>
                 <Route path="edit-enrollment/:id_enrollment" element={<EditEnrollmentWindow />}></Route>
+                <Route path="billing" element={<BillingWindow />}></Route>
             </Routes>
         </div>
     )
