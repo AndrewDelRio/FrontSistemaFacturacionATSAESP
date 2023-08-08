@@ -3,7 +3,7 @@ import { useState } from "react";
 import billingIcon from "../../../assets/images/invoice.svg"
 import warningIcon from "../../../assets/images/warning.svg"
 import { ModalMessagePerformed } from "../../../components/ModalMessagePerformed/ModalMessagePerformed"
-import { getBillingPeriodID, getPeriod, getProjectedBillingPeriod } from "../../../services/BillingPeriodServices"
+import { getBillingPeriodID, getPeriod, getProjectedBillingPeriod, getBillingPeriodStructuredDate } from "../../../services/BillingPeriodServices"
 import { getInvoiceLastPeriod } from "../../../services/BillingService"
 import "./BillingWindow.css"
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,14 @@ export function BillingWindow() {
                         if (result) {
                             getProjectedBillingPeriod().then((resBillingPeriod) => {
                                 if (resBillingPeriod) {
-                                    navigate('/secretary/verify-payments')
+                                    getBillingPeriodStructuredDate(period.id_period).then((resActualPeriod) => {
+                                        if (resActualPeriod) {
+                                            navigate('/secretary/verify-payments')
+                                        }
+                                    }).catch((err) => {
+                                        changeModalErrorState(!modalErrorState)
+                                    })
+
                                 }
                             }).catch((err) => {
                                 changeModalErrorState(!modalErrorState)
