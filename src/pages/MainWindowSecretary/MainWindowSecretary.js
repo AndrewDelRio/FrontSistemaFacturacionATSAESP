@@ -16,6 +16,7 @@ import { AddEnrollmentWindow } from "../Enrollments/AddEnrollmentWindow/AddEnrol
 import { EditEnrollmentWindow } from "../Enrollments/EditEnrollmentWindow/EditEnrollmentWindow";
 import { BillingWindow } from "../Billings/BillingWindows/BillingWindow";
 import { ValidationBillingPeriodOptionsWindow } from "../Billings/BillingPeriodWindow/ValidationBillingPeriodOptionsWindow"
+import { VerifyPaymentsManually } from "../Billings/VerifyPaymentsManually/VerifyPaymentsManually"
 import './MainWindowSecretary.css';
 
 const MainWindowSecretary = () => {
@@ -38,6 +39,7 @@ const MainWindowSecretary = () => {
                 <Route path="edit-enrollment/:id_enrollment" element={<EditEnrollmentWindow />}></Route>
                 <Route path="billing" element={<BillingWindow />}></Route>
                 <Route path="verify-payments" element={<ValidationBillingPeriodOptionsWindow />}></Route>
+                <Route path="verify-payments-manually" element={<VerifyPaymentsManually />}></Route>
             </Routes>
         </div>
     )

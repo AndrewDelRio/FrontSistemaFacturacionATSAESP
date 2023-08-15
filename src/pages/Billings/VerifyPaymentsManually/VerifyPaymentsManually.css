@@ -1,0 +1,89 @@
+.billing-validation-manually-container {
+    width: 85vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: auto;
+}
+
+.billing-icon {
+    margin-top: 5px;
+}
+
+.table-check-payments>table {
+    display: block;
+    height: 300px;
+    max-height: 350px;
+    overflow-y: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: solid var(--light-blue) 1px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    font-size: var(--text-form-size);
+    margin-bottom: 20px;
+    background-color: var(--light-blue-opaque-color-10);
+}
+
+.table-check-payments th,
+.table-check-payments td {
+    border-left: solid var(--light-blue) 2px;
+    border-bottom: solid var(--light-blue) 2px;
+    padding-inline: 20px;
+    padding-block: 5px;
+    text-align: center;
+}
+
+.table-check-payments td:first-child,
+.table-check-payments th:first-child {
+    border-left: none;
+}
+
+.table-check-payments thead {
+    background-color: var(--light-blue-opaque-color-80);
+    border-top: none;
+    color: var(--black-color);
+}
+
+.table-check-payments td {
+    margin: 0;
+    padding: 0;
+    padding-inline: 10px;
+    font-size: var(--text-form-size);
+}
+
+.table-check-payments tbody tr td {
+    background-color: var(--light-blue-opaque-color-10);
+}
+
+.table-check-payments thead th:first-child {
+    border-top-left-radius: 9px;
+}
+
+.table-check-payments thead th:last-child {
+    border-top-right-radius: 9px;
+}
+
+.table-check-payments tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 9px;
+}
+
+.table-check-payments tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 9px;
+}
+
+.check-payment {
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    border: none;
+}
+
+.date-input {
+    border-radius: 5px;
+    border: 0spx limegreen solid;
+    width: 100px;
+    height: 25px;
+    margin: 5px;
+}

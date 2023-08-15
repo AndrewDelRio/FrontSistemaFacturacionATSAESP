@@ -23,3 +23,18 @@ export const getInvoiceLastPeriod = (id_period) => new Promise((resolve, reject)
 export const getInvoiceLastPeriodList = () => {
     return billingLastPeriod
 }
+
+export const paidInvoices = (paidInvoiceList) => new Promise((resolve, reject) => {
+    const config = {
+        headers: {
+            token: sessionStorage.getItem('token')
+        }
+    }
+    axios.post(environment.APIHost + '/getPaidBillings', paidInvoiceList, config).then((res) => {
+        if (res) {
+            resolve(res)
+        }
+    }).catch((err) => {
+        reject(err)
+    })
+})

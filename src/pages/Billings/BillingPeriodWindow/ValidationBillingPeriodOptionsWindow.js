@@ -30,7 +30,7 @@ export function ValidationBillingPeriodOptionsWindow() {
     }
 
     const handleOnClickVerifyManually = () => {
-        navigate('/verify-payments-manually')
+        navigate('/secretary/verify-payments-manually')
     }
 
     return (
@@ -42,7 +42,7 @@ export function ValidationBillingPeriodOptionsWindow() {
             </div>
 
             <div className="billing-validations-buttons">
-                <button onClick={handleClickDownloadFile}>Descargar archivo para pagos</button>
+                <button disabled={true} onClick={handleClickDownloadFile} className="disabled-button">Descargar archivo para pagos</button>
 
                 <button disabled={true} className="disabled-button">Cargar archivo de pagos</button>
 
